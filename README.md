@@ -9,18 +9,23 @@
 
 ## 当前进度
 - 已完成计划书 `plan1.md`。
-- 代码框架与模块实现待落地。
+- 已将老师提供的中端代码克隆到本地 `compiler_ir` 目录，后续开发以该目录为主。
 
-## 项目结构（统一规划）
+## 项目结构（当前实际）
+> 说明：仓库根目录用于文档管理，代码开发在 `compiler_ir` 目录内完成。
+
 ```
-src/
-	lexer/        # 词法分析与 DFA
-	parser/       # SLR 表构建、分析驱动、AST
-	ir/           # AST visitor 与中端对接
-include/
-	common/       # Token/AST/符号表公共定义
-tests/          # 测试用例与期望输出
-docs/           # 报告与说明文档（可选）
+compiler-frontend/
+  README.md
+  plan1.md
+  compiler_ir/
+    CMakeLists.txt
+    main.cpp
+    Readme.md
+    include/        # 中端 IR 接口头文件
+    src/            # 中端 IR 实现
+    script/         # 辅助脚本
+    中端逻辑结构图.png
 ```
 
 ## 分工（5 位成员）
@@ -45,8 +50,9 @@ docs/           # 报告与说明文档（可选）
 
 ## 快速开始（项目启动阶段）
 1. 准备 C++ 编译环境与 LLVM 工具链。
-2. 阅读 `plan1.md` 了解分工与接口统一约定。
-3. 按模块落地代码结构后，再补充具体编译与运行命令。
+2. 进入 `compiler_ir` 目录作为项目主目录。
+3. 阅读 `plan1.md` 了解分工与接口统一约定。
+4. 按模块落地代码结构后，再补充具体编译与运行命令。
 
 ## 统一形式（输出与接口约定摘要）
 - **词法输出**：`[单词符号] [TAB] <[种别],[内容]>`。
