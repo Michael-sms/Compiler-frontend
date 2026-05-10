@@ -26,3 +26,5 @@ add_executable(project1 main.cpp)
 
 target_link_libraries(project1 project1_lib)
 
+add_executable(test_lexer tests/lexer/test_main.cpp)
+target_link_libraries(test_lexer compiler_lib)

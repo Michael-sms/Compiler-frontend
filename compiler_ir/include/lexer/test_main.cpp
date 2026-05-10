@@ -24,7 +24,7 @@ int main() {
     Lexer::printTokens(tokens);
 
     std::cout << "\n--- 符号表抽取结果 ---" << std::endl;
-    // 验证符号表维护逻辑（你的另一项交付职责）
+    // 验证符号表维护逻辑
     SymbolTable& st = lexer.getSymbolTable();
     SymbolEntry entry;
     if (st.lookup("Main", entry)) {
