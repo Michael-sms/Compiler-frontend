@@ -8,7 +8,6 @@ Lexer::Lexer(const std::string& sourceCode)
     buildAndMinimizeAutomata();
 }
 
-// 帮助函数：向NFA中添加精确字符串匹配（用于OP和SE）
 void Lexer::addStringNFA(AutomataCore& ac, int startState, const std::string& str, TokenType type) {
     int curr = startState;
     for (size_t i = 0; i < str.length(); ++i) {
@@ -20,7 +19,7 @@ void Lexer::addStringNFA(AutomataCore& ac, int startState, const std::string& st
 }
 
 void Lexer::buildNFA(AutomataCore& ac, int startState) {
-    // 1. IDN: (a-z|A-Z|_) (a-z|A-Z|_|0-9)*
+    // 1. IDN
     int idnStart = ac.addNFAState();
     int idnBody = ac.addNFAState();
     ac.addEpsilonTransition(startState, idnStart);
@@ -37,7 +36,7 @@ void Lexer::buildNFA(AutomataCore& ac, int startState) {
     addDigits(idnBody, idnBody);
     ac.setAccept(idnBody, TokenType::IDN);
 
-    // 2. INT: (0-9)+
+    // 2. INT
     int intStart = ac.addNFAState();
     int intBody = ac.addNFAState();
     ac.addEpsilonTransition(startState, intStart);
@@ -45,18 +44,19 @@ void Lexer::buildNFA(AutomataCore& ac, int startState) {
     addDigits(intBody, intBody);
     ac.setAccept(intBody, TokenType::INT);
 
-    // 3. FLOAT: (0-9)+ . (0-9)+
+    // 3. FLOAT
     int floatDot = ac.addNFAState();
     int floatBody = ac.addNFAState();
-    ac.addTransition(intBody, floatDot, '.'); // 复用int的路径
+    ac.addTransition(intBody, floatDot, '.'); 
     addDigits(floatDot, floatBody);
     addDigits(floatBody, floatBody);
     ac.setAccept(floatBody, TokenType::FLOAT);
 
-    // 4. OP & SE (通过字符串路径直接构建NFA)
+    // 4. OP: 规范要求 + - * / % = > < == <= >= != && ||
     std::vector<std::string> ops = {"+", "-", "*", "/", "%", "=", ">", "<", "==", "<=", ">=", "!=", "&&", "||"};
     for (const auto& op : ops) addStringNFA(ac, startState, op, TokenType::OP);
 
+    // 5. SE: 规范要求 ( ) { } ; ,
     std::vector<std::string> ses = {"(", ")", "{", "}", ";", ","};
     for (const auto& se : ses) addStringNFA(ac, startState, se, TokenType::SE);
 }
@@ -65,11 +65,19 @@ void Lexer::buildAndMinimizeAutomata() {
     AutomataCore ac;
     int nfaStart = ac.addNFAState();
     buildNFA(ac, nfaStart);
-    
-    // NFA -> DFA
     std::vector<DFAState> dfa = ac.nfaToDfa(nfaStart);
-    // DFA -> MinDFA
     minDfa = ac.minimizeDfa(dfa, dfaStart);
+}
+
+std::string Lexer::toLower(const std::string& str) {
+    std::string lowerStr = str;
+    std::transform(lowerStr.begin(), lowerStr.end(), lowerStr.begin(), ::tolower);
+    return lowerStr;
+}
+
+bool Lexer::isKeywordIgnoreCase(const std::string& id) {
+    const std::vector<std::string> kws = {"int", "void", "return", "const", "main", "float", "if", "else"};
+    return std::find(kws.begin(), kws.end(), toLower(id)) != kws.end();
 }
 
 void Lexer::skipWhitespaceAndComments() {
@@ -80,7 +88,6 @@ void Lexer::skipWhitespaceAndComments() {
             else { currentCol++; }
             currentPos++;
         } else if (c == '/' && currentPos + 1 < source.length() && source[currentPos+1] == '*') {
-            // 跳过多行注释 /* ... */
             currentPos += 2; currentCol += 2;
             while (currentPos + 1 < source.length() && !(source[currentPos] == '*' && source[currentPos+1] == '/')) {
                 if (source[currentPos] == '\n') { currentLine++; currentCol = 1; }
@@ -92,13 +99,6 @@ void Lexer::skipWhitespaceAndComments() {
             break;
         }
     }
-}
-
-bool Lexer::isKeyword(const std::string& id) {
-    std::string lowerId = id;
-    std::transform(lowerId.begin(), lowerId.end(), lowerId.begin(), ::tolower);
-    const std::vector<std::string> kws = {"int", "void", "return", "const", "main", "float", "if", "else"};
-    return std::find(kws.begin(), kws.end(), lowerId) != kws.end();
 }
 
 std::vector<Token> Lexer::tokenize() {
@@ -113,7 +113,6 @@ std::vector<Token> Lexer::tokenize() {
         int lastAcceptPos = -1;
         
         int tempPos = currentPos;
-        // 最大贪婪匹配 (Maximal Munch)
         while (tempPos < source.length()) {
             char c = source[tempPos];
             if (minDfa[state].transitions.count(c) == 0) break;
@@ -130,34 +129,35 @@ std::vector<Token> Lexer::tokenize() {
             std::string lexeme = source.substr(currentPos, lastAcceptPos - currentPos + 1);
             TokenType type = minDfa[lastAcceptState].acceptType;
 
-            // 关键字查表判断
-            if (type == TokenType::IDN && isKeyword(lexeme)) {
+            // 处理不区分大小写的关键字
+            if (type == TokenType::IDN && isKeywordIgnoreCase(lexeme)) {
                 type = TokenType::KW;
             }
 
             tokens.push_back({type, lexeme, currentLine, currentCol});
             
-            // 写入符号表 (标识符)
+            // 维护前端符号表 (仅加入标识符，Parser后续补充类型和作用域)
             if (type == TokenType::IDN) {
-                symTable.insert(lexeme, {lexeme, "variable", "unknown", 0});
+                symTable.insert(lexeme, {lexeme, "var", "unknown", 0, ""});
             }
 
             currentCol += lexeme.length();
             currentPos = lastAcceptPos + 1;
         } else {
-            // 处理无法识别的错误字符
             tokens.push_back({TokenType::ERROR, std::string(1, source[currentPos]), currentLine, currentCol});
             currentPos++; currentCol++;
         }
     }
     
-    tokens.push_back({TokenType::END_FILE, "EOF", currentLine, currentCol});
+    // 接口统一规范：末尾追加 EOF
+    tokens.push_back({TokenType::EOF_TOK, "EOF", currentLine, currentCol});
     return tokens;
 }
 
+// 规范：[单词符号] [TAB] <[种别],[内容]>，关键字不区分大小写
 void Lexer::printTokens(const std::vector<Token>& tokens) {
     for (const auto& t : tokens) {
-        if (t.type == TokenType::END_FILE) break;
+        if (t.type == TokenType::EOF_TOK) break;
         
         std::string typeStr;
         switch(t.type) {
@@ -168,15 +168,25 @@ void Lexer::printTokens(const std::vector<Token>& tokens) {
             case TokenType::INT: typeStr = "INT"; break;
             case TokenType::FLOAT: typeStr = "FLOAT"; break;
             case TokenType::ERROR: typeStr = "ERROR"; break;
-            default: typeStr = "UNKNOWN"; break;
+            default: break;
         }
         
-        std::string outLexeme = t.lexeme;
-        // 根据规范，关键字不区分大小写，这里输出统一转小写
+        std::string content = t.lexeme;
+        // 关键字输出统一为小写（实现不区分大小写的要求）
         if (t.type == TokenType::KW) {
-            std::transform(outLexeme.begin(), outLexeme.end(), outLexeme.begin(), ::tolower);
+            std::transform(content.begin(), content.end(), content.begin(), ::tolower);
         }
 
-        std::cout << t.lexeme << "\t<" << typeStr << "," << outLexeme << ">\n";
+        std::cout << t.lexeme << "\t<" << typeStr << "," << content << ">\n";
+    }
+}
+
+void Lexer::printSymbolTable() {
+    std::cout << "\n=== 前端符号表 (IDN) ===\n";
+    std::cout << "Name\tKind\tType\tScope\n";
+    for (const auto& key : symTable.getKeys()) {
+        FrontSymbolEntry entry;
+        symTable.lookup(key, entry);
+        std::cout << entry.name << "\t" << entry.kind << "\t" << entry.type << "\t" << entry.scope << "\n";
     }
 }

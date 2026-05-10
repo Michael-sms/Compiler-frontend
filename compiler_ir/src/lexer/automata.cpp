@@ -50,7 +50,6 @@ std::set<int> AutomataCore::move(const std::set<int>& states, char c) {
     return result;
 }
 
-// 子集构造法
 std::vector<DFAState> AutomataCore::nfaToDfa(int nfaStartState) {
     std::vector<DFAState> dfa;
     std::map<std::set<int>, int> dfaStateMap;
@@ -66,18 +65,16 @@ std::vector<DFAState> AutomataCore::nfaToDfa(int nfaStartState) {
         int currentDfaState = dfaStateMap[currentSet];
         worklist.pop();
 
-        // 确定该DFA状态是否为接受状态 (优先级：保留最先定义的Token类型)
         for (int nfaState : currentSet) {
             if (nfaStates[nfaState].isAccept) {
                 dfa[currentDfaState].isAccept = true;
-                // 冲突解决：简单取遍历到的第一个有效acceptType
-                if (dfa[currentDfaState].acceptType == TokenType::ERROR) {
+                if (dfa[currentDfaState].acceptType == TokenType::ERROR || 
+                    nfaStates[nfaState].acceptType < dfa[currentDfaState].acceptType) {
                     dfa[currentDfaState].acceptType = nfaStates[nfaState].acceptType;
                 }
             }
         }
 
-        // 收集所有可能的输入字符
         std::set<char> allChars;
         for (int s : currentSet) {
             for (auto const& pair : nfaStates[s].transitions) {
@@ -101,18 +98,13 @@ std::vector<DFAState> AutomataCore::nfaToDfa(int nfaStartState) {
     return dfa;
 }
 
-// Moore 分划算法最小化 DFA
 std::vector<DFAState> AutomataCore::minimizeDfa(const std::vector<DFAState>& dfa, int& startState) {
     if (dfa.empty()) return {};
 
     std::vector<int> partition(dfa.size());
-    // 初始分划：依据是否接受及接受类型区分
     for (size_t i = 0; i < dfa.size(); ++i) {
-        if (!dfa[i].isAccept) {
-            partition[i] = 0;
-        } else {
-            partition[i] = static_cast<int>(dfa[i].acceptType) + 1;
-        }
+        if (!dfa[i].isAccept) partition[i] = 0;
+        else partition[i] = static_cast<int>(dfa[i].acceptType) + 1;
     }
 
     bool changed = true;
@@ -142,11 +134,9 @@ std::vector<DFAState> AutomataCore::minimizeDfa(const std::vector<DFAState>& dfa
         partition = newPartition;
     }
 
-    // 重构最小化DFA
     int numMinStates = *std::max_element(partition.begin(), partition.end()) + 1;
     std::vector<DFAState> minDfa(numMinStates);
-    
-    startState = partition[0]; // 假设原起点为 0
+    startState = partition[0]; 
 
     for (size_t i = 0; i < dfa.size(); ++i) {
         int minId = partition[i];

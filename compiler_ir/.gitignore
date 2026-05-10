@@ -30,3 +30,30 @@
 *.exe
 *.out
 *.app
+
+# 忽略 CMake 构建目录
+build/
+bin/
+
+# 忽略 VSCode 配置文件
+.vscode/
+
+# 忽略 Windows 下的编译产物
+*.exe
+*.obj
+*.lib
+*.dll
+*.pdb
+*.ilk
+
+# 忽略 Linux/macOS 下的编译产物
+*.o
+*.a
+*.so
+*.out
+
+# 忽略 CMake 缓存文件（即使你在根目录不小心敲了 cmake）
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+Makefile
