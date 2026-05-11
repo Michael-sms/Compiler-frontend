@@ -17,27 +17,3 @@
 
 由于文件间涉及多文件调用，所以单一的编译会出现问题（暂时不清楚如何解决，没有试过。。）,cmake版本已经测通，修改类内部分函数的声明与定义情况
 
-## 词法分析器 (Lexer) 编译与测试指南
-
-本项目使用 CMake 进行构建，支持将词法分析器作为独立的模块进行单元测试。
-
-### 1. 编译步骤
-请确保你的电脑上已安装 CMake 和 C++ 编译环境（如 MSVC 或 GCC）。
-在项目根目录（`compiler_ir`）下打开终端，依次执行以下命令：
-
-```bash
-# 创建并进入构建目录（Out-of-source Build）
-mkdir build
-cd build
-
-# 生成构建文件
-cmake ..
-
-# 编译项目（包含主程序和词法测试程序）
-cmake --build .
-
-# Windows 环境：
-.\Debug\test_lexer.exe
-
-# Linux/Mac 环境：
-./test_lexer
