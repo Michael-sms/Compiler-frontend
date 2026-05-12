@@ -57,3 +57,12 @@ CMakeCache.txt
 CMakeFiles/
 cmake_install.cmake
 Makefile
+
+# 忽略其他可能的编译产物
+*.log
+*.tmp
+*.bak
+*.swp
+
+# 忽略输出目录
+parser_a_output/

@@ -1,7 +1,7 @@
 #pragma once
-#include "common/token.h"
-#include "common/symtable.h"
-#include "lexer/automata.h"
+#include "token.h"
+#include "symtable.h"
+#include "automata.h"
 #include <vector>
 #include <string>
 

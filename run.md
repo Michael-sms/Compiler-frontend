@@ -13,15 +13,40 @@ cmake -S . -B build
 cmake --build build --config Debug
 ```
 
-## 三、运行词法分析器测试
+## 三、运行测试入口（合并后）
+测试入口已合并到 `tests\test_main.cpp`，通过参数选择模式：
+
+### 1) 词法测试
 - **MSVC（常见于 Windows）**
 ```powershell
-.\build\Debug\test_lexer.exe
+.\build\Debug\test_lexer.exe lexer
 ```
 
 - **非 MSVC（如 MinGW/Clang）**
 ```powershell
-.\build\test_lexer.exe
+.\build\test_lexer.exe lexer
+```
+
+### 2) Parser A 表构建
+- **MSVC（常见于 Windows）**
+```powershell
+.\build\Debug\test_lexer.exe parserA
+```
+
+- **非 MSVC（如 MinGW/Clang）**
+```powershell
+.\build\test_lexer.exe parserA
+```
+
+### 3) 指定 Parser A 输出目录（可选）
+- **MSVC（常见于 Windows）**
+```powershell
+.\build\Debug\test_lexer.exe parserA ".\parser_a_output"
+```
+
+- **非 MSVC（如 MinGW/Clang）**
+```powershell
+.\build\test_lexer.exe parserA ".\parser_a_output"
 ```
 
 ## 四、运行 main.cpp（默认样例 or 指定文件）
@@ -33,6 +58,28 @@ cmake --build build --config Debug
 - **非 MSVC（如 MinGW/Clang）**
 ```powershell
 .\build\project1.exe
+```
+
+### Parser A 表构建（main.cpp）
+- **MSVC（常见于 Windows）**
+```powershell
+.\build\Debug\project1.exe parserA
+```
+
+- **非 MSVC（如 MinGW/Clang）**
+```powershell
+.\build\project1.exe parserA
+```
+
+### 指定 Parser A 输出目录（可选）
+- **MSVC（常见于 Windows）**
+```powershell
+.\build\Debug\project1.exe parserA ".\parser_a_output"
+```
+
+- **非 MSVC（如 MinGW/Clang）**
+```powershell
+.\build\project1.exe parserA ".\parser_a_output"
 ```
 
 ### 指定输入文件（.sy）
@@ -49,7 +96,7 @@ cmake --build build --config Debug
 ```
 
 ## 五、词法测试输入说明
-当前测试入口位于 `compiler_ir\tests\lexer\test_main.cpp`：
+当前测试入口位于 `compiler_ir\tests\test_main.cpp`：
 - 修改其中的 `sourceCode` 字符串即可测试不同的 C-- 代码片段。
 - 输出包含词法单词序列与符号表。
 

@@ -1,4 +1,4 @@
-#include "lexer/lexer.h"
+#include "lexer.h"
 #include <iostream>
 #include <cctype>
 #include <algorithm>
@@ -182,7 +182,7 @@ void Lexer::printTokens(const std::vector<Token>& tokens) {
 }
 
 void Lexer::printSymbolTable() {
-    std::cout << "\n=== 前端符号表 (IDN) ===\n";
+    std::cout << "\n=== Front Symbol Table (IDN) ===\n";
     std::cout << "Name\tKind\tType\tScope\n";
     for (const auto& key : symTable.getKeys()) {
         FrontSymbolEntry entry;

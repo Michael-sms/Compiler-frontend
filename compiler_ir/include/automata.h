@@ -2,7 +2,7 @@
 #include <vector>
 #include <map>
 #include <set>
-#include "common/token.h"
+#include "token.h"
 
 struct NFAState {
     std::map<char, std::vector<int>> transitions;

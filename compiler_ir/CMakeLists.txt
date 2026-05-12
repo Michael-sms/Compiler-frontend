@@ -30,6 +30,6 @@ add_library(project1_lib ${DIR_SRC})
 add_executable(project1 main.cpp)
 target_link_libraries(project1 project1_lib)
 
-# 5. 你的词法分析器单测入口
-add_executable(test_lexer tests/lexer/test_main.cpp)
+# 5. 测试入口（词法 & Parser A）
+add_executable(test_lexer tests/test_main.cpp)
 target_link_libraries(test_lexer project1_lib)

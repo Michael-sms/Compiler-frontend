@@ -6,7 +6,7 @@
 #include <utility>
 #include <vector>
 
-#include "common/token.h"
+#include "token.h"
 
 namespace parser_a {
 

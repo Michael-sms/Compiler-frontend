@@ -1,4 +1,4 @@
-#include "parser/slr_parser_a.h"
+#include "slr_parser_a.h"
 
 #include <algorithm>
 #include <cctype>
