@@ -22,7 +22,7 @@ cmake --build build-mingw
 ```
 
 ## 三、运行测试入口（合并后）
-测试入口已合并到 `tests\test_main.cpp`，通过参数选择模式：
+测试入口已合并到 `tests\test_main.cpp`，Parser A/B 代码已整合到 `slr_parser.h/.cpp`，通过参数选择模式：
 
 ### 1) 词法测试
 - **MSVC（常见于 Windows）**
