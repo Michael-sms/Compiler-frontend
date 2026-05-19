@@ -8,9 +8,17 @@ cd "c:\Users\Lenovo\Desktop\2526source\编译原理\大作业\compiler-frontend\
 ```
 
 ## 二、配置与编译
+### 1) MSVC (Visual Studio / Build Tools)
 ```powershell
 cmake -S . -B build
 cmake --build build --config Debug
+```
+
+### 2) MinGW-w64
+首次切换到 MinGW 时建议使用新的构建目录：
+```powershell
+cmake -S . -B build-mingw -G "MinGW Makefiles"
+cmake --build build-mingw
 ```
 
 ## 三、运行测试入口（合并后）
@@ -38,7 +46,18 @@ cmake --build build --config Debug
 .\build\test_lexer.exe parserA
 ```
 
-### 3) 指定 Parser A 输出目录（可选）
+### 3) Parser B 驱动与 AST
+- **MSVC（常见于 Windows）**
+```powershell
+.\build\Debug\test_lexer.exe parserB "path\to\input.sy"
+```
+
+- **非 MSVC（如 MinGW/Clang）**
+```powershell
+.\build\test_lexer.exe parserB "path\to\input.sy"
+```
+
+### 4) 指定 Parser A 输出目录（可选）
 - **MSVC（常见于 Windows）**
 ```powershell
 .\build\Debug\test_lexer.exe parserA ".\parser_a_output"
@@ -103,3 +122,4 @@ cmake --build build --config Debug
 ## 六、常见问题
 - 若找不到可执行文件，请确认构建命令成功完成，并检查 `build` 目录下对应的输出路径。
 - 若你使用的是 Release 配置，请将运行路径中的 `Debug` 替换为 `Release`。
+- 使用 MinGW 时无 `Debug` 子目录，直接使用 `build-mingw` 下的可执行文件。
