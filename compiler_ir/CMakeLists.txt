@@ -21,7 +21,8 @@ endif()
 include_directories("include")
 
 # 2. 收集 src 下所有的 .cpp 文件
-file(GLOB_RECURSE DIR_SRC "src/*.cpp")
+
+file(GLOB_RECURSE DIR_SRC CONFIGURE_DEPENDS "src/*.cpp")
 
 # 3. 将所有核心代码打包成一个名为 project1_lib 的库
 add_library(project1_lib ${DIR_SRC})

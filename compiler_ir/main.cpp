@@ -1,5 +1,5 @@
 #include "lexer.h"
-#include "slr_parser_a.h"
+#include "SLRParser.h"
 #include <fstream>
 #include <iostream>
 #include <sstream>
@@ -19,6 +19,38 @@ std::string readFileOrEmpty(const std::string& path) {
     std::ostringstream ss;
     ss << in.rdbuf();
     return ss.str();
+}
+
+void runParserBDemo(const std::string& sourceCode) {
+    std::cout << "--- Parser B Trace ---\n";
+    std::cout.flush();
+    Lexer lexer(sourceCode);
+    std::vector<Token> tokens = lexer.tokenize();
+
+    parser_b::ParseResult result;
+    try {
+        parser_b::SLRParserB parser = parser_b::SLRParserB::BuildDefault();
+        result = parser.parse(tokens, true, std::cout);
+    } catch (const std::exception& ex) {
+        std::cout << "\n--- Exception ---\n" << ex.what() << "\n";
+        return;
+    } catch (...) {
+        std::cout << "\n--- Exception ---\n<unknown>\n";
+        return;
+    }
+
+    std::cout << "\n--- Reduction Sequence ---\n";
+    parser_b::SLRParserB::PrintReductionSequence(result.reductions, std::cout);
+
+    std::cout << "\n--- Errors ---\n";
+    parser_b::SLRParserB::PrintErrors(result.errors, std::cout);
+
+    std::cout << "\n--- AST (Preorder) ---\n";
+    if (result.root) {
+        frontend::DumpAstPreorder(result.root, std::cout);
+    } else {
+        std::cout << "<empty>\n";
+    }
 }
 }
 
@@ -48,6 +80,22 @@ int main(int argc, char** argv) {
         return 0;
     }
 
+    if (argc >= 2 && std::string(argv[1]) == "parserB") {
+        std::string sourceCode;
+        if (argc >= 3) {
+            sourceCode = readFileOrEmpty(argv[2]);
+            if (sourceCode.empty()) {
+                std::cerr << "Failed to read input file: " << argv[2] << std::endl;
+                return 1;
+            }
+        } else {
+            sourceCode = "int a;";
+        }
+
+        runParserBDemo(sourceCode);
+        return 0;
+    }
+
     std::string sourceCode;
 
     // 约定：若传入参数，则按文件输入；否则使用内置样例
@@ -73,8 +121,8 @@ int main(int argc, char** argv) {
         )";
     }
 
-    // 当前阶段：仅进行词法分析与符号表输出
-    // 后续阶段：将 tokens 传入 Parser，得到 AST，再交由 IR 生成模块
+    // 当前阶段：词法输出与 Parser A/Parser B 表构建入口已打通
+    // 后续阶段：将 AST 交由 IR 生成模块
     std::cout << "--- Lexer Output ---" << std::endl;
     Lexer lexer(sourceCode);
     std::vector<Token> tokens = lexer.tokenize();

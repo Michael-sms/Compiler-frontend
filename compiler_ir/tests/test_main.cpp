@@ -1,7 +1,5 @@
-#include "ast.h"
 #include "lexer.h"
-#include "slr_parser_a.h"
-#include "slr_parser_b.h"
+#include "SLRParser.h"
 
 #include <fstream>
 #include <iostream>
