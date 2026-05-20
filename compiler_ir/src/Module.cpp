@@ -166,13 +166,30 @@ void Module::set_print_name() {
  */
 std::string Module::print() {
   std::string module_ir;
+  module_ir += "; ModuleID = '" + module_name_ + "'\n";
+  module_ir += "source_filename = \"" + source_file_name_ + "\"\n";
   for (auto global_val : this->global_list_) {
     module_ir += global_val->print();
     module_ir += "\n";
   }
+  bool has_decl = false;
+  bool has_def = false;
   for (auto func : this->function_list_) {
-    module_ir += func->print();
+    if (func->is_declaration()) {
+      has_decl = true;
+      module_ir += func->print();
+    } else {
+      has_def = true;
+    }
+  }
+  if (has_decl && has_def) {
     module_ir += "\n";
+  }
+  for (auto func : this->function_list_) {
+    if (!func->is_declaration()) {
+      module_ir += func->print();
+      module_ir += "\n";
+    }
   }
   return module_ir;
 }

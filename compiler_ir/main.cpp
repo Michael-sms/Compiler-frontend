@@ -1,6 +1,7 @@
 ﻿#include "lexer.h"
 #include "SLRParser.h"
 #include "IRGenerator.h"
+#include "Module.h"
 #include <fstream>
 #include <iostream>
 #include <sstream>
@@ -54,7 +55,9 @@ void runParserBDemo(const std::string& sourceCode) {
     }
 }
 
-void runIRDemo(const std::string& sourceCode, const std::string& outputPath) {
+void runIRDemo(const std::string& sourceCode,
+               const std::string& outputPath,
+               const std::string& sourcePath) {
     Lexer lexer(sourceCode);
     std::vector<Token> tokens = lexer.tokenize();
 
@@ -76,7 +79,16 @@ void runIRDemo(const std::string& sourceCode, const std::string& outputPath) {
         return;
     }
 
-    IRGenerator generator("sysy2025_compiler");
+    IRGenerator generator("sysy2022_compiler");
+    if (!sourcePath.empty()) {
+        std::string normalized = sourcePath;
+        for (auto& ch : normalized) {
+            if (ch == '\\') {
+                ch = '/';
+            }
+        }
+        generator.module()->set_source_file_name(normalized);
+    }
     generator.generate(result.root);
 
     if (!generator.errors().empty()) {
@@ -98,15 +110,10 @@ void runIRDemo(const std::string& sourceCode, const std::string& outputPath) {
 
 std::string defaultSample() {
     return R"(
-    int main() {
-    int a = 10;
-    int b = 20;
-    int c = a + b;
-    if (c > 0) {
-        return c;
-    } else {
-        return 0;
-    }
+int a = 10;
+int main(){
+	a=10;
+	return 0;
 }
         )";
 }
@@ -169,7 +176,7 @@ int main(int argc, char** argv) {
         if (argc >= 4) {
             outputPath = argv[3];
         }
-        runIRDemo(sourceCode, outputPath);
+        runIRDemo(sourceCode, outputPath, argc >= 3 ? argv[2] : "");
         return 0;
     }
 

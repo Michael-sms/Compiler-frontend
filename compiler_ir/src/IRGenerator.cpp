@@ -183,6 +183,7 @@ void IRGenerator::generate(const frontend::ASTNodePtr& root) {
     if (!root) {
         return;
     }
+    declareRuntimeFunctions();
     visitProgram(root);
     module_->set_print_name();
 }
@@ -375,14 +376,6 @@ void IRGenerator::visitVarDecl(const frontend::ASTNodePtr& node) {
         auto initNode = FindFirstChild(varDef, "initVal");
         if (!currentFunction_) {
             int initVal = 0;
-            bool ok = false;
-            if (initNode) {
-                initVal = evalConstInt(initNode, ok);
-                if (!ok) {
-                    addError(initNode, "global init must be integer literal expression");
-                    initVal = 0;
-                }
-            }
             auto init = ConstantInt::get(initVal, module_);
             auto gv = GlobalVariable::create(name, module_, type, false, init);
             insertVar(name, gv);
@@ -390,7 +383,8 @@ void IRGenerator::visitVarDecl(const frontend::ASTNodePtr& node) {
             auto alloca = builder_->create_alloca(type);
             insertVar(name, alloca);
             if (initNode) {
-                auto val = visitExp(initNode);
+                auto expNode = FindFirstChild(initNode, "exp");
+                auto val = visitExp(expNode ? expNode : initNode);
                 if (val) {
                     builder_->create_store(val, alloca);
                 }
@@ -439,7 +433,10 @@ void IRGenerator::visitFuncDef(const frontend::ASTNodePtr& node) {
     currentFunction_ = func;
     builder_->set_curFunc(func);
 
-    auto entry = BasicBlock::create(module_, "entry", func);
+    auto entry = BasicBlock::create(module_, "", func);
+    if (!funcName.empty()) {
+        entry->set_name(funcName + "_ENTRY");
+    }
     currentBB_ = entry;
     builder_->set_insert_point(entry);
 
@@ -469,6 +466,26 @@ void IRGenerator::visitFuncDef(const frontend::ASTNodePtr& node) {
     exitScope();
     currentFunction_ = nullptr;
     currentBB_ = nullptr;
+}
+
+void IRGenerator::declareRuntimeFunctions() {
+    std::vector<std::pair<std::string, FunctionType*>> decls;
+    auto i32 = module_->get_int32_type();
+    auto i32Ptr = module_->get_int32_ptr_type();
+    auto voidTy = module_->get_void_type();
+
+    decls.push_back({"getint", FunctionType::get(i32, {})});
+    decls.push_back({"getch", FunctionType::get(i32, {})});
+    decls.push_back({"getarray", FunctionType::get(i32, {i32Ptr})});
+    decls.push_back({"putint", FunctionType::get(voidTy, {i32})});
+    decls.push_back({"putch", FunctionType::get(voidTy, {i32})});
+    decls.push_back({"putarray", FunctionType::get(voidTy, {i32, i32Ptr})});
+    decls.push_back({"starttime", FunctionType::get(voidTy, {})});
+    decls.push_back({"stoptime", FunctionType::get(voidTy, {})});
+
+    for (const auto& decl : decls) {
+        Function::create(decl.second, decl.first, module_);
+    }
 }
 
 void IRGenerator::visitBlock(const frontend::ASTNodePtr& node) {
@@ -534,10 +551,10 @@ void IRGenerator::visitAssignStmt(const frontend::ASTNodePtr& node) {
     if (!lValNode || !expNode) {
         return;
     }
-    auto addr = visitLVal(lValNode, false);
-    auto val = visitExp(expNode);
-    if (addr && val) {
-        builder_->create_store(val, addr);
+    auto lhsVal = visitLVal(lValNode, true);
+    auto rhsVal = visitExp(expNode);
+    if (lhsVal && rhsVal) {
+        builder_->create_store(lhsVal, rhsVal);
     }
 }
 
@@ -966,7 +983,16 @@ int IRGenerator::evalConstInt(const frontend::ASTNodePtr& node, bool& ok) {
     if (node->nodeType == "constInitVal") {
         return evalConstInt(FindFirstChild(node, "constExp"), ok);
     }
+    if (node->nodeType == "initVal") {
+        auto expNode = FindFirstChild(node, "exp");
+        if (expNode) {
+            return evalConstInt(expNode, ok);
+        }
+    }
     if (node->nodeType == "constExp") {
+        return evalConstInt(FindFirstChild(node, "addExp"), ok);
+    }
+    if (node->nodeType == "exp") {
         return evalConstInt(FindFirstChild(node, "addExp"), ok);
     }
     if (node->nodeType == "addExp") {

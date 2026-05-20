@@ -58,6 +58,8 @@ private:
     void visitReturnStmt(const frontend::ASTNodePtr& node);
     void visitIfStmt(const frontend::ASTNodePtr& node);
 
+    void declareRuntimeFunctions();
+
     Value* visitExp(const frontend::ASTNodePtr& node);
     Value* visitAddExp(const frontend::ASTNodePtr& node);
     Value* visitMulExp(const frontend::ASTNodePtr& node);

@@ -166,6 +166,22 @@ public:
    */
   void set_print_name();
   /**
+   * @brief Set the source file name for IR header
+   *
+   * @param name 源文件名
+   */
+  void set_source_file_name(const std::string &name) {
+    source_file_name_ = name;
+  }
+  /**
+   * @brief 获取模块名称
+   */
+  const std::string &get_module_name() const { return module_name_; }
+  /**
+   * @brief 获取源文件名
+   */
+  const std::string &get_source_file_name() const { return source_file_name_; }
+  /**
    * @brief 打印中间代码
    *
    * @return std::string
