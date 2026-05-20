@@ -1,0 +1,5 @@
+int a = 10;
+int main() {
+    a = 20;
+    return a;
+}

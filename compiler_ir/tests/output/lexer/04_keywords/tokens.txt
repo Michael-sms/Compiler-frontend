@@ -1,0 +1,10 @@
+int	<KW,int>
+void	<KW,void>
+return	<KW,return>
+const	<KW,const>
+main	<KW,main>
+float	<KW,float>
+if	<KW,if>
+else	<KW,else>
+INT	<KW,int>
+VOID	<KW,void>

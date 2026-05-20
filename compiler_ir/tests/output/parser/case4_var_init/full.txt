@@ -1,0 +1,51 @@
+--- Parser B Trace ---
+SLRParserB build start.
+SLRParserB build done.
+1	$#int	move
+2	int#Ident	reduction
+3	bType#Ident	move
+4	Ident#=	move
+5	=#IntConst	move
+6	IntConst#;	reduction
+7	number#;	reduction
+8	primaryExp#;	reduction
+9	unaryExp#;	reduction
+10	mulExp#;	reduction
+11	addExp#;	reduction
+12	exp#;	reduction
+13	initVal#;	reduction
+14	varDef#;	move
+15	;#$	reduction
+16	varDecl#$	reduction
+17	decl#$	reduction
+18	compUnit#$	reduction
+19	compUnit#$	reduction
+20	Program#$	accept
+
+--- Reduction Sequence ---
+Reduction sequence (production ids):
+9 46 45 48 58 62 40 17 16 14 6 4 2 1
+
+--- Errors ---
+Errors: <none>
+
+--- AST (Preorder) ---
+Program (1:1)
+  compUnit (1:1)
+    decl (1:1)
+      varDecl (1:1)
+        bType (1:1)
+          int (1:1) [int]
+        varDef (1:5)
+          Ident (1:5) [a]
+          = (1:7) [=]
+          initVal (1:9)
+            exp (1:9)
+              addExp (1:9)
+                mulExp (1:9)
+                  unaryExp (1:9)
+                    primaryExp (1:9)
+                      number (1:9)
+                        IntConst (1:9) [3]
+        ; (1:10) [;]
+    compUnit (2:1)

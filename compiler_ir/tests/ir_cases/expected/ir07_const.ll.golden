@@ -1,5 +1,6 @@
 ; ModuleID = 'sysy2022_compiler'
-source_filename = "tests/ir_cases/ir03_main_return.sy"
+source_filename = "tests/ir_cases/ir07_const.sy"
+@N = constant i32 5
 declare i32 @getint()
 declare i32 @getch()
 declare i32 @getarray(i32*)
@@ -11,5 +12,6 @@ declare void @stoptime()
 
 define i32 @main() {
 main_ENTRY:
-  ret i32 0
+  %op0 = load i32, i32* @N
+  ret i32 %op0
 }

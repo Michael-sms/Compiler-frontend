@@ -1,0 +1,3 @@
+int	<KW,int>
+a	<IDN,a>
+;	<SE,;>

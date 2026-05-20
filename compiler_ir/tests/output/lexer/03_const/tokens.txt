@@ -1,0 +1,6 @@
+const	<KW,const>
+int	<KW,int>
+x	<IDN,x>
+=	<OP,=>
+1	<INT,1>
+;	<SE,;>

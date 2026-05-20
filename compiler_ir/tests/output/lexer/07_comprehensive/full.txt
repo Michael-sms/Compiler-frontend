@@ -1,0 +1,46 @@
+--- Lexer Output ---
+int	<KW,int>
+main	<KW,main>
+(	<SE,(>
+)	<SE,)>
+{	<SE,{>
+const	<KW,const>
+int	<KW,int>
+N	<IDN,N>
+=	<OP,=>
+10	<INT,10>
+;	<SE,;>
+int	<KW,int>
+a	<IDN,a>
+=	<OP,=>
+10	<INT,10>
+;	<SE,;>
+if	<KW,if>
+(	<SE,(>
+a	<IDN,a>
+>=	<OP,>=>
+5	<INT,5>
+&&	<OP,&&>
+N	<IDN,N>
+<=	<OP,<=>
+20	<INT,20>
+)	<SE,)>
+{	<SE,{>
+return	<KW,return>
+a	<IDN,a>
+*	<OP,*>
+2	<INT,2>
+;	<SE,;>
+}	<SE,}>
+else	<KW,else>
+{	<SE,{>
+return	<KW,return>
+0	<INT,0>
+;	<SE,;>
+}	<SE,}>
+}	<SE,}>
+
+=== Front Symbol Table (IDN) ===
+Name	Kind	Type	Scope
+N	var	unknown	0
+a	var	unknown	0

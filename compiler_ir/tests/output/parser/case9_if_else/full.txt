@@ -1,0 +1,133 @@
+--- Parser B Trace ---
+SLRParserB build start.
+SLRParserB build done.
+1	$#int	move
+2	int#main	reduction
+3	funcType#main	move
+4	main#(	reduction
+5	FuncName#(	move
+6	(#)	move
+7	)#{	move
+8	{#if	move
+9	if#(	move
+10	(#IntConst	move
+11	IntConst#<	reduction
+12	number#<	reduction
+13	primaryExp#<	reduction
+14	unaryExp#<	reduction
+15	mulExp#<	reduction
+16	addExp#<	reduction
+17	relExp#<	move
+18	<#IntConst	move
+19	IntConst#)	reduction
+20	number#)	reduction
+21	primaryExp#)	reduction
+22	unaryExp#)	reduction
+23	mulExp#)	reduction
+24	addExp#)	reduction
+25	relExp#)	reduction
+26	eqExp#)	reduction
+27	lAndExp#)	reduction
+28	lOrExp#)	reduction
+29	cond#)	move
+30	)#return	move
+31	return#IntConst	move
+32	IntConst#;	reduction
+33	number#;	reduction
+34	primaryExp#;	reduction
+35	unaryExp#;	reduction
+36	mulExp#;	reduction
+37	addExp#;	reduction
+38	exp#;	move
+39	;#else	reduction
+40	stmt#else	move
+41	else#return	move
+42	return#IntConst	move
+43	IntConst#;	reduction
+44	number#;	reduction
+45	primaryExp#;	reduction
+46	unaryExp#;	reduction
+47	mulExp#;	reduction
+48	addExp#;	reduction
+49	exp#;	move
+50	;#}	reduction
+51	stmt#}	reduction
+52	stmt#}	reduction
+53	blockItem#}	reduction
+54	blockItemList#}	reduction
+55	blockItemList#}	move
+56	}#$	reduction
+57	block#$	reduction
+58	funcDef#$	reduction
+59	compUnit#$	reduction
+60	compUnit#$	reduction
+61	Program#$	accept
+
+--- Reduction Sequence ---
+Reduction sequence (production ids):
+23 21 46 45 48 58 62 65 46 45 48 58 62 66 70 73 75 41 46 45 48 58 62 40 38 46 45 48 58 62 40 38 36 31 29 28 27 19 4 3 1
+
+--- Errors ---
+Errors: <none>
+
+--- AST (Preorder) ---
+Program (1:1)
+  compUnit (1:1)
+    funcDef (1:1)
+      funcType (1:1)
+        int (1:1) [int]
+      FuncName (1:5)
+        main (1:5) [main]
+      ( (1:9) [(]
+      ) (1:10) [)]
+      block (1:12)
+        { (1:12) [{]
+        blockItemList (2:5)
+          blockItem (2:5)
+            stmt (2:5)
+              if (2:5) [if]
+              ( (2:8) [(]
+              cond (2:9)
+                lOrExp (2:9)
+                  lAndExp (2:9)
+                    eqExp (2:9)
+                      relExp (2:9)
+                        relExp (2:9)
+                          addExp (2:9)
+                            mulExp (2:9)
+                              unaryExp (2:9)
+                                primaryExp (2:9)
+                                  number (2:9)
+                                    IntConst (2:9) [1]
+                        < (2:11) [<]
+                        addExp (2:13)
+                          mulExp (2:13)
+                            unaryExp (2:13)
+                              primaryExp (2:13)
+                                number (2:13)
+                                  IntConst (2:13) [2]
+              ) (2:14) [)]
+              stmt (2:16)
+                return (2:16) [return]
+                exp (2:23)
+                  addExp (2:23)
+                    mulExp (2:23)
+                      unaryExp (2:23)
+                        primaryExp (2:23)
+                          number (2:23)
+                            IntConst (2:23) [1]
+                ; (2:24) [;]
+              else (3:5) [else]
+              stmt (3:10)
+                return (3:10) [return]
+                exp (3:17)
+                  addExp (3:17)
+                    mulExp (3:17)
+                      unaryExp (3:17)
+                        primaryExp (3:17)
+                          number (3:17)
+                            IntConst (3:17) [0]
+                ; (3:18) [;]
+          blockItemList (4:1)
+        } (4:1) [}]
+    compUnit (5:1)

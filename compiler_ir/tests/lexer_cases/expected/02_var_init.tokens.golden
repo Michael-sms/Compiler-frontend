@@ -1,0 +1,5 @@
+int	<KW,int>
+a	<IDN,a>
+=	<OP,=>
+10	<INT,10>
+;	<SE,;>

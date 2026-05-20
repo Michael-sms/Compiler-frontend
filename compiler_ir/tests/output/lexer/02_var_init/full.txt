@@ -1,0 +1,10 @@
+--- Lexer Output ---
+int	<KW,int>
+a	<IDN,a>
+=	<OP,=>
+10	<INT,10>
+;	<SE,;>
+
+=== Front Symbol Table (IDN) ===
+Name	Kind	Type	Scope
+a	var	unknown	0

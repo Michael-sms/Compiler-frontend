@@ -1,0 +1,15 @@
+--- Parser B Trace ---
+SLRParserB build start.
+SLRParserB build done.
+1	$#int	move
+2	int#;	error
+
+--- Reduction Sequence ---
+Reduction sequence (production ids): <empty>
+
+--- Errors ---
+Errors:
+- Syntax error at line 1, column 5: unexpected ';' (;)
+
+--- AST (Preorder) ---
+<empty>

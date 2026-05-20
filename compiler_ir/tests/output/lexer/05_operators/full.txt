@@ -1,0 +1,18 @@
+--- Lexer Output ---
++	<OP,+>
+-	<OP,->
+*	<OP,*>
+/	<OP,/>
+%	<OP,%>
+=	<OP,=>
+>	<OP,>>
+<	<OP,<>
+==	<OP,==>
+<=	<OP,<=>
+>=	<OP,>=>
+!=	<OP,!=>
+&&	<OP,&&>
+||	<OP,||>
+
+=== Front Symbol Table (IDN) ===
+Name	Kind	Type	Scope
