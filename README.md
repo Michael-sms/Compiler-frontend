@@ -1,4 +1,4 @@
-# C-- 编译器前端（Compiler Frontend）
+﻿# C-- 编译器前端（Compiler Frontend）
 
 本项目为天津大学编译原理大作业的编译器前端实现，目标是完成 C-- 语言到 LLVM IR（`.ll`）的编译前端，包括词法分析、SLR 语法分析、语义/中间代码生成衔接。
 
@@ -10,7 +10,9 @@
 ## 当前进度
 - 已完成成员2任务：词法分析器与 DFA 相关实现，词法输出与符号表可用。
 - 已完成成员3任务：LR(0) 项目集、FIRST/FOLLOW、SLR 预测分析表生成工具。
-- 已将中端代码克隆到本地 `compiler_ir`，并在 `main.cpp` 提供词法与 Parser A 表构建入口。
+- 已完成成员4任务：SLR 驱动（Parser B）、规约序列与错误输出、AST 构建。
+- 已完成 AST → IR 的基础生成流程：`project1.exe ir` 可生成 `.ll` 输出。
+- 文法已支持块内多条语句（`blockItemList` 递归结构）。
 
 ## 项目结构（当前实际）
 > 说明：仓库根目录用于文档管理，代码开发在 `compiler_ir` 目录内完成。
@@ -23,8 +25,8 @@ compiler-frontend/
     CMakeLists.txt
     main.cpp
     Readme.md
-    include/        # 中端 IR 接口头文件
-    src/            # 中端 IR 实现
+    inclugitde/        # 前端与中端接口头文件
+    src/            # 前端与中端实现
     script/         # 辅助脚本
     中端逻辑结构图.png
 ```
@@ -63,6 +65,7 @@ compiler-frontend/
 
 ## 运行说明
 - 编译与运行流程见 `run.md`（包含默认样例与 `.sy` 文件输入方式）。
+- 生成 LLVM IR：`project1.exe ir input.sy output.ll`。
 
 ## 参考
 - 课程附件与文法说明（见 `plan1.md`）。

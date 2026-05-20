@@ -1,4 +1,4 @@
-# 运行说明（run.md）
+﻿# 运行说明（run.md）
 
 本说明基于当前仓库结构与先前给出的编译方法，适用于 Windows PowerShell 环境。
 
@@ -112,6 +112,19 @@ cmake --build build-mingw
 - **非 MSVC（如 MinGW/Clang）**
 ```powershell
 .\build\project1.exe "path\to\test.sy"
+```
+
+### 生成 LLVM IR（.ll）
+使用 `ir` 模式生成 `.ll`，可指定输出文件名：
+
+- **MSVC（常见于 Windows）**
+```powershell
+.\build\Debug\project1.exe ir "path\to\test.sy" ".\output.ll"
+```
+
+- **非 MSVC（如 MinGW/Clang）**
+```powershell
+.\build\project1.exe ir "path\to\test.sy" ".\output.ll"
 ```
 
 ## 五、词法测试输入说明
