@@ -1,4 +1,4 @@
-#include "SLRParser.h"
+﻿#include "SLRParser.h"
 
 #include <algorithm>
 #include <cctype>
@@ -570,15 +570,18 @@ std::vector<Production> BuildDefaultCMinusGrammar() {
     prods.push_back({id++, "varDef", {"Ident"}});
     prods.push_back({id++, "varDef", {"Ident", "=", "initVal"}});
     prods.push_back({id++, "initVal", {"exp"}});
-    prods.push_back({id++, "funcDef", {"funcType", "Ident", "(", "funcFParams", ")", "block"}});
-    prods.push_back({id++, "funcDef", {"funcType", "Ident", "(", ")", "block"}});
+    prods.push_back({id++, "funcDef", {"funcType", "FuncName", "(", "funcFParams", ")", "block"}});
+    prods.push_back({id++, "funcDef", {"funcType", "FuncName", "(", ")", "block"}});
+    prods.push_back({id++, "FuncName", {"Ident"}});
+    prods.push_back({id++, "FuncName", {"main"}});  // main 关键字作为函数名
     prods.push_back({id++, "funcType", {"void"}});
     prods.push_back({id++, "funcType", {"int"}});
     prods.push_back({id++, "funcFParams", {"funcFParam", ",", "funcFParams"}});
     prods.push_back({id++, "funcFParams", {"funcFParam"}});
     prods.push_back({id++, "funcFParam", {"bType", "Ident"}});
-    prods.push_back({id++, "block", {"{", "blockItem", "}"}});
-    prods.push_back({id++, "block", {"{", "}"}});
+    prods.push_back({id++, "block", {"{", "blockItemList", "}"}});
+    prods.push_back({id++, "blockItemList", {"blockItem", "blockItemList"}});
+    prods.push_back({id++, "blockItemList", {kEpsilon}});
     prods.push_back({id++, "blockItem", {"decl"}});
     prods.push_back({id++, "blockItem", {"stmt"}});
     prods.push_back({id++, "stmt", {"lVal", "=", "exp", ";"}});
@@ -853,3 +856,4 @@ void SLRParserB::PrintErrors(const std::vector<std::string>& errors, std::ostrea
 }
 
 }  // namespace parser_b
+

@@ -1,6 +1,6 @@
-/*!
+﻿/*!
  *@file BasicBlock.cpp
- *@brief 基本块接口定义文件
+ *@brief 鍩烘湰鍧楁帴鍙ｅ畾涔夋枃浠?
  *@version 1.0.0
  *@date 2022-10-04
  */
@@ -13,15 +13,15 @@
 /*!
  *@brief 基本块的创建函数
  *@param m 所从属模块
- *@param name 基本块名称
- *@param parent 所从属的函数
+ *@param name 鍩烘湰鍧楀悕绉?
+ *@param parent 鎵€浠庡睘鐨勫嚱鏁?
  *@param fake 是否是假基本块，即基本块是否为空，默认为
  *@return 创建的基本块对象指针
  *@note
  *----------
  *默认基本块名称为label_()number
- *构建默认为真基本块，名称为空，类型为基本块
- *&emsp; 如果parent为空，创建失败，异常退出
+ *鏋勫缓榛樿涓虹湡鍩烘湰鍧楋紝鍚嶇О涓虹┖锛岀被鍨嬩负鍩烘湰鍧?
+ *&emsp; 濡傛灉parent涓虹┖锛屽垱寤哄け璐ワ紝寮傚父閫€鍑?
  *&emsp; 向所属的函数中添加基本块指针
  */
 BasicBlock::BasicBlock(Module *m, const std::string &name = "",
@@ -32,17 +32,17 @@ BasicBlock::BasicBlock(Module *m, const std::string &name = "",
 }
 
 /*!
- *@brief 向基本块中添加指令
+ *@brief 鍚戝熀鏈潡涓坊鍔犳寚浠?
  *@param 待添加的指令指针
  *@note
  *----------
- *在基本块的尾部添加指令
+ *鍦ㄥ熀鏈潡鐨勫熬閮ㄦ坊鍔犳寚浠?
  *&emsp; 设置待添加的指令后缀为空
  *&emsp; **if** 如果指令链表为空
- *&emsp;&emsp; 设置指令为后继为空
- *&emsp;&emsp; 不为空，则获取指令链表的最后一个指令
- *&emsp;&emsp; 设置插入指令的前继为最后一个指令
- *&emsp;&emsp; 最后一个指令后继为待插入指令
+ *&emsp;&emsp; 璁剧疆鎸囦护涓哄悗缁т负绌?
+ *&emsp;&emsp; 涓嶄负绌猴紝鍒欒幏鍙栨寚浠ら摼琛ㄧ殑鏈€鍚庝竴涓寚浠?
+ *&emsp;&emsp; 璁剧疆鎻掑叆鎸囦护鐨勫墠缁т负鏈€鍚庝竴涓寚浠?
+ *&emsp;&emsp; 鏈€鍚庝竴涓寚浠ゅ悗缁т负寰呮彃鍏ユ寚浠?
  *&emsp; 尾部插入指令
  */
 void BasicBlock::add_instruction(Instruction *instr) {
@@ -58,8 +58,8 @@ void BasicBlock::add_instruction(Instruction *instr) {
 }
 
   /*!
-   *@brief 返回基本块的所属模块
-   *@return 从属的模块对象指针
+   *@brief 杩斿洖鍩烘湰鍧楃殑鎵€灞炴ā鍧?
+   *@return 浠庡睘鐨勬ā鍧楀璞℃寚閽?
    *@note
    *----------
    *return parent, or null if none.
@@ -67,7 +67,7 @@ void BasicBlock::add_instruction(Instruction *instr) {
   Module *BasicBlock::get_module() { return get_parent()->get_parent(); }
 
   /*!
-   *@brief 将基本块从从属的函数中删除
+   *@brief 灏嗗熀鏈潡浠庝粠灞炵殑鍑芥暟涓垹闄?
    *@note
    *----------
    *获取基本块的所属函数并删除函数所保存的关于该基本块的指针
@@ -75,17 +75,17 @@ void BasicBlock::add_instruction(Instruction *instr) {
   void BasicBlock::erase_from_parent() { this->get_parent()->remove(this); }
 
 /*!
- *@brief 向基本块中添加指令
+ *@brief 鍚戝熀鏈潡涓坊鍔犳寚浠?
  *@param 待添加的指令指针
  *@note
  *----------
- *在基本块的头部添加指令
+ *鍦ㄥ熀鏈潡鐨勫ご閮ㄦ坊鍔犳寚浠?
  *&emsp; 设置待添加的指令前继为空
  *&emsp; **if** 如果指令链表为空
- *&emsp;&emsp; 设置指令为后继为空
- *&emsp;&emsp; 不为空，则获取指令链表的第一个指令
- *&emsp;&emsp; 设置插入指令的后继为第一个指令
- *&emsp;&emsp; 第一个指令前继为待插入指令
+ *&emsp;&emsp; 璁剧疆鎸囦护涓哄悗缁т负绌?
+ *&emsp;&emsp; 涓嶄负绌猴紝鍒欒幏鍙栨寚浠ら摼琛ㄧ殑绗竴涓寚浠?
+ *&emsp;&emsp; 璁剧疆鎻掑叆鎸囦护鐨勫悗缁т负绗竴涓寚浠?
+ *&emsp;&emsp; 绗竴涓寚浠ゅ墠缁т负寰呮彃鍏ユ寚浠?
  *&emsp; 头部插入指令
  */
 void BasicBlock::add_instr_begin(Instruction *instr) {
@@ -105,24 +105,24 @@ void BasicBlock::add_instr_begin(Instruction *instr) {
  *@param 待添加的指令指针
  *@note
  *----------
- *向phi指令后添加指令
+ *鍚憄hi鎸囦护鍚庢坊鍔犳寚浠?
  *&emsp; 设置指令的从属基本块
- *&emsp; 获取指令链表的开始
- *&emsp;&emsp; **for** 循环，遍历获得phi指令点
- *&emsp; **if** 如果不是链表头，phi节点前继为节点前继
- *&emsp; **if** 如果不是链表尾，phi节点后继设置为节点本身
+ *&emsp; 鑾峰彇鎸囦护閾捐〃鐨勫紑濮?
+ *&emsp;&emsp; **for** 寰幆锛岄亶鍘嗚幏寰梡hi鎸囦护鐐?
+ *&emsp; **if** 濡傛灉涓嶆槸閾捐〃澶达紝phi鑺傜偣鍓嶇户涓鸿妭鐐瑰墠缁?
+ *&emsp; **if** 濡傛灉涓嶆槸閾捐〃灏撅紝phi鑺傜偣鍚庣户璁剧疆涓鸿妭鐐规湰韬?
  *&emsp; 修正插入节点的连接关系，前继和后继的修改
  */
 void BasicBlock::add_instr_after_phi(Instruction *instr) {
   instr->set_parent(this);
   auto it = instr_list_.begin();
-  //遍历获得phi指令点
+  //閬嶅巻鑾峰緱phi鎸囦护鐐?
   for (; it != instr_list_.end(); ++it) {
     if (!(*it)->is_phi()) {
       break;
     }
   }
-  //获取插入点
+  //鑾峰彇鎻掑叆鐐?
   Instruction *front = nullptr, *back = nullptr;
   if (it != instr_list_.begin()) {
     front = *(--it);
@@ -137,54 +137,54 @@ void BasicBlock::add_instr_after_phi(Instruction *instr) {
   if (back != nullptr) {
     back->setPrevInst(instr);
   }
-  // 设置待插入节点的前后继
+  // 璁剧疆寰呮彃鍏ヨ妭鐐圭殑鍓嶅悗缁?
   instr->setPrevInst(front);
   instr->setSuccInst(back);
   instr_list_.insert(it, instr);
 }
 
 /*!
- *@brief 删除基本块中的某个指令
+ *@brief 鍒犻櫎鍩烘湰鍧椾腑鐨勬煇涓寚浠?
  *@param 待删除的指令指针
  *@note
  *----------
- *&emsp; 删除维护的指令链表中的指令
+ *&emsp; 鍒犻櫎缁存姢鐨勬寚浠ら摼琛ㄤ腑鐨勬寚浠?
  *&emsp; 获取删除的指令的前后指令
  *&emsp; 修正指令的链接关系：
- *&emsp; **if** 如果前置指令不为空
- *&emsp;&emsp; 为前置指令设置新的后置指令
- *&emsp; **if** 如果后置指令不为空
- *&emsp;&emsp; 为后置指令设置新的前置指令
- *&emsp; 被删除的指令进行相关use的删除
+ *&emsp; **if** 濡傛灉鍓嶇疆鎸囦护涓嶄负绌?
+ *&emsp;&emsp; 涓哄墠缃寚浠よ缃柊鐨勫悗缃寚浠?
+ *&emsp; **if** 濡傛灉鍚庣疆鎸囦护涓嶄负绌?
+ *&emsp;&emsp; 涓哄悗缃寚浠よ缃柊鐨勫墠缃寚浠?
+ *&emsp; 琚垹闄ょ殑鎸囦护杩涜鐩稿叧use鐨勫垹闄?
  */
 void BasicBlock::delete_instr(Instruction *instr) {
   instr_list_.remove(instr);
   Instruction *prev = instr->getPrevInst();
   Instruction *succ = instr->getSuccInst();
-  //修正指令的链接关系
+  //淇鎸囦护鐨勯摼鎺ュ叧绯?
   if (prev != nullptr) {
     prev->setSuccInst(succ);
   }
   if (succ != nullptr) {
     succ->setPrevInst(prev);
   }
-  //被删除的指令进行相关use的删除
+  //琚垹闄ょ殑鎸囦护杩涜鐩稿叧use鐨勫垹闄?
   instr->remove_use_of_ops();
 }
 
 /*!
- *@brief 获取基本块内的终结指令
+ *@brief 鑾峰彇鍩烘湰鍧楀唴鐨勭粓缁撴寚浠?
  *@return 终结指令常量指针
  *@note
  *----------
  *Returns the terminator instruction if the block is well formed
  *if the block is not well formed then null
- *返回基本块的的中的终结指令常量指针
+ *杩斿洖鍩烘湰鍧楃殑鐨勪腑鐨勭粓缁撴寚浠ゅ父閲忔寚閽?
  *---------
  *&emsp; 如果为空，返回null
  *&emsp; 获取终结指令的类型，并进行对应的判定
- *&emsp;&emsp; 返回指令，返回指令表的最后一个指令
- *&emsp;&emsp; 条件指令，返回指令表的最后一个指令
+ *&emsp;&emsp; 杩斿洖鎸囦护锛岃繑鍥炴寚浠よ〃鐨勬渶鍚庝竴涓寚浠?
+ *&emsp;&emsp; 鏉′欢鎸囦护锛岃繑鍥炴寚浠よ〃鐨勬渶鍚庝竴涓寚浠?
  *&emsp;&emsp; 其他指令，判定为空，返回
  */
 const Instruction *BasicBlock::get_terminator() const {
@@ -207,18 +207,18 @@ const Instruction *BasicBlock::get_terminator() const {
 }
 
 /*!
- *@brief 打印基本块
- *@return 待打印的字符串
+ *@brief 鎵撳嵃鍩烘湰鍧?
+ *@return 寰呮墦鍗扮殑瀛楃涓?
  *@note
  *----------
  *return parent, or null if none.
- *&emsp; 如果基本块为假，那么输出空
+ *&emsp; 濡傛灉鍩烘湰鍧椾负鍋囷紝閭ｄ箞杈撳嚭绌?
  *&emsp; 定义输出字符串string
  *&emsp; 添加基本块名称，
  *&emsp; 添加前置基本块的说明，依次打印前置基本块
  *&emsp; 隶属于函数则进行空行添加
- *&emsp; 依次打印维护的指令链表内容
- *&emsp; 如果基本块无终结指令，默认添加
+ *&emsp; 渚濇鎵撳嵃缁存姢鐨勬寚浠ら摼琛ㄥ唴瀹?
+ *&emsp; 濡傛灉鍩烘湰鍧楁棤缁堢粨鎸囦护锛岄粯璁ゆ坊鍔?
  */
 std::string BasicBlock::print() {
   if (_fake) {

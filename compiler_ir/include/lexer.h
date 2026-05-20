@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include "token.h"
 #include "symtable.h"
 #include "automata.h"
@@ -13,7 +13,7 @@ public:
     std::vector<Token> tokenize();
     FrontSymbolTable& getSymbolTable() { return symTable; }
     
-    // 严格按规范格式打印
+    // 涓ユ牸鎸夎鑼冩牸寮忔墦鍗?
     static void printTokens(const std::vector<Token>& tokens);
     void printSymbolTable();
 
@@ -35,3 +35,4 @@ private:
     std::string toLower(const std::string& str);
     void skipWhitespaceAndComments();
 };
+

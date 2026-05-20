@@ -1,4 +1,4 @@
-/*!
+﻿/*!
  *@file Instruction.cpp
  *@brief 指令接口定义文件
  *@version 1.0.0

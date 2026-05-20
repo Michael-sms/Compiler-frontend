@@ -1,6 +1,6 @@
-/*!
+﻿/*!
  *@file Module.h
- *@brief 模块接口头文件
+ *@brief 妯″潡鎺ュ彛澶存枃浠?
  *@version 1.0.0
  *@date 2022-10-04
  */
@@ -21,7 +21,7 @@
 class GlobalVariable;
 
 /**
- * @brief 模块类，中间结构的大类
+ * @brief 妯″潡绫伙紝涓棿缁撴瀯鐨勫ぇ绫?
  *
  */
 class Module {
@@ -33,7 +33,7 @@ private:
   Type *void_ty_;
   FloatType *float32_ty_;
 
-  /// @brief 指针映射图和数组映射图
+  /// @brief 鎸囬拡鏄犲皠鍥惧拰鏁扮粍鏄犲皠鍥?
   std::map<Type *, PointerType *> pointer_map_;
   std::map<std::pair<Type *, int>, ArrayType *> array_map_;
 
@@ -107,9 +107,9 @@ public:
    */
   PointerType *get_float_ptr_type();
   /**
-   * @brief Get the pointer type object，获取一个构建好的指针类型指针
+   * @brief Get the pointer type object锛岃幏鍙栦竴涓瀯寤哄ソ鐨勬寚閽堢被鍨嬫寚閽?
    *
-   * @param contained 指针指向数据的类型
+   * @param contained 鎸囬拡鎸囧悜鏁版嵁鐨勭被鍨?
    * @return PointerType*
    */
   PointerType *get_pointer_type(Type *contained);
@@ -128,31 +128,31 @@ public:
    */
   void add_function(Function *f);
   /**
-   * @brief Get the functions object，获取函数列表
+   * @brief Get the functions object锛岃幏鍙栧嚱鏁板垪琛?
    *
    * @return std::list<Function *> 函数列表
    */
   std::list<Function *> get_functions();
   /**
-   * @brief 添加全局量
+   * @brief 娣诲姞鍏ㄥ眬閲?
    *
-   * @param g 全局量指针
+   * @param g 鍏ㄥ眬閲忔寚閽?
    */
   void add_global_variable(GlobalVariable *g);
   /**
-   * @brief 删除全局量
+   * @brief 鍒犻櫎鍏ㄥ眬閲?
    *
-   * @param g 全局量指针
+   * @param g 鍏ㄥ眬閲忔寚閽?
    */
   void delete_global_variable(GlobalVariable *g) { global_list_.remove(g); }
   /**
-   * @brief Get the global variable object，获取全局量指针数组
+   * @brief Get the global variable object锛岃幏鍙栧叏灞€閲忔寚閽堟暟缁?
    *
-   * @return std::list<GlobalVariable *> 全局量指针数组
+   * @return std::list<GlobalVariable *> 鍏ㄥ眬閲忔寚閽堟暟缁?
    */
   std::list<GlobalVariable *> get_global_variable();
   /**
-   * @brief Get the instr op name object，获取指令
+   * @brief Get the instr op name object锛岃幏鍙栨寚浠?
    *
    * @param instr 指令id
    * @return std::string ID的字符串表达
@@ -174,3 +174,4 @@ public:
 };
 
 #endif // SYSYC_MODULE_H
+

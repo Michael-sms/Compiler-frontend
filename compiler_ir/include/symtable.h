@@ -1,15 +1,15 @@
-#pragma once
+﻿#pragma once
 #include <string>
 #include <unordered_map>
 #include <vector>
 
-// 严格遵循前端符号表规范字段
+// 涓ユ牸閬靛惊鍓嶇绗﹀彿琛ㄨ鑼冨瓧娈?
 struct FrontSymbolEntry {
     std::string name;
-    std::string kind;  // "var", "func", "array" 等
-    std::string type;  // "int", "float", "void" 等
-    int scope;         // 作用域层级 (Lexer默认给0，由Parser维护)
-    std::string value; // 可选的常量值
+    std::string kind;  // "var", "func", "array" 绛?
+    std::string type;  // "int", "float", "void" 绛?
+    int scope;         // 浣滅敤鍩熷眰绾?(Lexer榛樿缁?锛岀敱Parser缁存姢)
+    std::string value; // 鍙€夌殑甯搁噺鍊?
 };
 
 class FrontSymbolTable {
@@ -37,3 +37,4 @@ private:
     std::unordered_map<std::string, FrontSymbolEntry> table;
     std::vector<std::string> ordered_keys; // 用于顺序打印展示
 };
+

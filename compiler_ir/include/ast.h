@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include <memory>
 #include <ostream>
@@ -27,3 +27,4 @@ ASTNodePtr MakeNonterminalNode(const std::string& nodeType,
 void DumpAstPreorder(const ASTNodePtr& node, std::ostream& out, int indent = 0);
 
 }  // namespace frontend
+

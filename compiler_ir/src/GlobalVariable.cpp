@@ -1,4 +1,4 @@
-/*!
+﻿/*!
  *@file GlobalVariable.h
  *@brief 全局变量接口定义文件
  *@version 1.0.0
@@ -8,11 +8,11 @@
 #include "IRprinter.h"
 
 /*!
- *@brief 全局变量的构造函数
+ *@brief 鍏ㄥ眬鍙橀噺鐨勬瀯閫犲嚱鏁?
  *@param name 全局变量名称
  *@param m 所从属模块
- *@param ty 变量的类型
- *@param is_const 是否为常量
+ *@param ty 鍙橀噺鐨勭被鍨?
+ *@param is_const 鏄惁涓哄父閲?
  *@param init 常量指针
  *@return 当前对象本身
  *@note
@@ -30,17 +30,17 @@ GlobalVariable::GlobalVariable(std::string name, Module *m, Type *ty,
 } // global操作数为initval
 
 /*!
- *@brief 全局变量的创建函数
+ *@brief 鍏ㄥ眬鍙橀噺鐨勫垱寤哄嚱鏁?
  *@param name 全局变量名称
  *@param m 所从属模块
- *@param ty 变量的类型
- *@param is_const 是否为常量
+ *@param ty 鍙橀噺鐨勭被鍨?
+ *@param is_const 鏄惁涓哄父閲?
  *@param init 常量指针
  *@return 当前对象本身
  *@note
  *-------
- *全局变量的创建
- *默认变量类型为指针类型，无初值
+ *鍏ㄥ眬鍙橀噺鐨勫垱寤?
+ *榛樿鍙橀噺绫诲瀷涓烘寚閽堢被鍨嬶紝鏃犲垵鍊?
  */
 GlobalVariable *GlobalVariable::create(std::string name, Module *m, Type *ty,
                                        bool is_const,
@@ -50,14 +50,14 @@ GlobalVariable *GlobalVariable::create(std::string name, Module *m, Type *ty,
 
 /*!
  *@brief 打印全局变量
- *@return 字符串
+ *@return 瀛楃涓?
  *@note
  *--------
  *初始化字符串
  *添加名称
  *添加常量类型
- *添加数据指针所指向数据的类型
- *添加变量初值
+ *娣诲姞鏁版嵁鎸囬拡鎵€鎸囧悜鏁版嵁鐨勭被鍨?
+ *娣诲姞鍙橀噺鍒濆€?
  */
 std::string GlobalVariable::print() {
   std::string global_val_ir;

@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include <vector>
 #include <map>
 #include <set>
@@ -24,7 +24,7 @@ public:
     void addEpsilonTransition(int from, int to);
     void setAccept(int state, TokenType type);
     
-    // NFA->DFA 确定化
+    // NFA->DFA 纭畾鍖?
     std::vector<DFAState> nfaToDfa(int nfaStartState);
     // DFA 最小化
     std::vector<DFAState> minimizeDfa(const std::vector<DFAState>& dfa, int& startState);
@@ -34,3 +34,4 @@ private:
     std::set<int> epsilonClosure(const std::set<int>& states);
     std::set<int> move(const std::set<int>& states, char c);
 };
+

@@ -1,4 +1,4 @@
-/*!
+﻿/*!
  *@file Constant.h
  *@brief 常量接口定义文件
  *@version 1.0.0
@@ -9,34 +9,34 @@
 #include <iostream>
 #include <sstream>
 /*!
- *@brief 常量整数类32位创建函数
- *@param val 常量值
- *@param m 所属模块
- *@return 常量类对象指针
+ *@brief 甯搁噺鏁存暟绫?2浣嶅垱寤哄嚱鏁?
+ *@param val 甯搁噺鍊?
+ *@param m 鎵€灞炴ā鍧?
+ *@return 甯搁噺绫诲璞℃寚閽?
  */
 ConstantInt *ConstantInt::get(int val, Module *m) {
   return new ConstantInt(Type::get_int32_type(m), val);
 }
 /*!
- *@brief 常量整数类1位创建函数
- *@param val 常量值
- *@param m 所属模块
- *@return 常量类对象指针
+ *@brief 甯搁噺鏁存暟绫?浣嶅垱寤哄嚱鏁?
+ *@param val 甯搁噺鍊?
+ *@param m 鎵€灞炴ā鍧?
+ *@return 甯搁噺绫诲璞℃寚閽?
  */
 ConstantInt *ConstantInt::get(bool val, Module *m) {
   return new ConstantInt(Type::get_int1_type(m), val ? 1 : 0);
 }
 /*!
- *@brief 打印常量类变量
- *@return 字符串
+ *@brief 鎵撳嵃甯搁噺绫诲彉閲?
+ *@return 瀛楃涓?
  *@note
  *---------
  *获取常量类型
- *&emsp; **if** 判定为整数常量类型并且为1为的布尔类型，
- *&emsp;&emsp; 添加true/flase字符串
- *&emsp; 判定为32位类型
+ *&emsp; **if** 鍒ゅ畾涓烘暣鏁板父閲忕被鍨嬪苟涓斾负1涓虹殑甯冨皵绫诲瀷锛?
+ *&emsp;&emsp; 娣诲姞true/flase瀛楃涓?
+ *&emsp; 鍒ゅ畾涓?2浣嶇被鍨?
  *&emsp; 将其数组转换为字符串输出
- *&emsp; 返回字符串
+ *&emsp; 杩斿洖瀛楃涓?
  */
 std::string ConstantInt::print() {
   std::string const_ir;
@@ -53,10 +53,10 @@ std::string ConstantInt::print() {
 }
 
 /*!
- *@brief 常量整数类构造函数
+ *@brief 甯搁噺鏁存暟绫绘瀯閫犲嚱鏁?
  *@param ty 常量类型
- *@param val 常量数值类型数组
- *@return 自身类对象
+ *@param val 甯搁噺鏁板€肩被鍨嬫暟缁?
+ *@return 鑷韩绫诲璞?
  *constant int array
  */
 ConstantArray::ConstantArray(ArrayType *ty, const std::vector<Constant *> &val)
@@ -66,9 +66,9 @@ ConstantArray::ConstantArray(ArrayType *ty, const std::vector<Constant *> &val)
   this->const_array.assign(val.begin(), val.end());
 }
 /*!
- *@brief 获取常量数组指定索引的常量数值
+ *@brief 鑾峰彇甯搁噺鏁扮粍鎸囧畾绱㈠紩鐨勫父閲忔暟鍊?
  *@param index 索引
- *@return 常量类指针
+ *@return 甯搁噺绫绘寚閽?
  *constant int array
  */
 Constant *ConstantArray::get_element_value(int index) {
@@ -76,9 +76,9 @@ Constant *ConstantArray::get_element_value(int index) {
 }
 /*!
  *@brief 常量数组类的创建函数
- *@param ty 数组元素的类型
- *@param val 常量类数组
- *@return 常量数组类指针
+ *@param ty 鏁扮粍鍏冪礌鐨勭被鍨?
+ *@param val 甯搁噺绫绘暟缁?
+ *@return 甯搁噺鏁扮粍绫绘寚閽?
  *constant int array
  */
 ConstantArray *ConstantArray::get(ArrayType *ty,
@@ -86,8 +86,8 @@ ConstantArray *ConstantArray::get(ArrayType *ty,
   return new ConstantArray(ty, val);
 }
 /*!
- *@brief 常量数组类打印函数
- *@return 字符串
+ *@brief 甯搁噺鏁扮粍绫绘墦鍗板嚱鏁?
+ *@return 瀛楃涓?
  *constant int array
  */
 std::string ConstantArray::print() {
@@ -105,18 +105,19 @@ std::string ConstantArray::print() {
   return const_ir;
 }
 /*!
- *@brief 常量整数类构造函数
+ *@brief 甯搁噺鏁存暟绫绘瀯閫犲嚱鏁?
  *@param ty 常量类型
- *@param val 常量数值类型数组
- *@return 自身类对象
+ *@param val 甯搁噺鏁板€肩被鍨嬫暟缁?
+ *@return 鑷韩绫诲璞?
  *constant int zero
  */
 ConstantZero *ConstantZero::get(Type *ty, Module *m) {
   return new ConstantZero(ty);
 }
 /*!
- *@brief 打印常量零值
- *@return 字符串
+ *@brief 鎵撳嵃甯搁噺闆跺€?
+ *@return 瀛楃涓?
  *constant int zero
  */
 std::string ConstantZero::print() { return "zeroinitializer"; }
+

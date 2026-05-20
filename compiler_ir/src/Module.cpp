@@ -1,4 +1,4 @@
-/*!
+﻿/*!
  *@file Module.h
  *@brief 模块接口定义文件
  *@version 1.0.0
@@ -17,7 +17,7 @@ Module::Module(std::string name) : module_name_(std::move(name)) {
   int32_ty_ = new IntegerType(32, this);
   float32_ty_ = new FloatType(this);
 
-  /// @brief id 与 字符串的映射添加
+  /// @brief id 涓?瀛楃涓茬殑鏄犲皠娣诲姞
   instr_id2string_.insert({Instruction::ret, "ret"});
   instr_id2string_.insert({Instruction::br, "br"});
 
@@ -74,9 +74,9 @@ IntegerType *Module::get_int1_type() { return int1_ty_; }
  */
 IntegerType *Module::get_int32_type() { return int32_ty_; }
 /**
- * @brief Get the pointer type object，获取一个构建好的指针类型指针
+ * @brief Get the pointer type object锛岃幏鍙栦竴涓瀯寤哄ソ鐨勬寚閽堢被鍨嬫寚閽?
  *
- * @param contained 指针指向数据的类型
+ * @param contained 鎸囬拡鎸囧悜鏁版嵁鐨勭被鍨?
  * @return PointerType*
  */
 PointerType *Module::get_pointer_type(Type *contained) {
@@ -128,23 +128,23 @@ PointerType *Module::get_float_ptr_type() {
  */
 void Module::add_function(Function *f) { function_list_.push_back(f); }
 /**
- * @brief Get the functions object，获取函数列表
+ * @brief Get the functions object锛岃幏鍙栧嚱鏁板垪琛?
  *
  * @return std::list<Function *> 函数列表
  */
 std::list<Function *> Module::get_functions() { return function_list_; }
 /**
- * @brief 添加全局量
+ * @brief 娣诲姞鍏ㄥ眬閲?
  *
- * @param g 全局量指针
+ * @param g 鍏ㄥ眬閲忔寚閽?
  */
 void Module::add_global_variable(GlobalVariable *g) {
   global_list_.push_back(g);
 }
 /**
- * @brief Get the global variable object，获取全局量指针数组
+ * @brief Get the global variable object锛岃幏鍙栧叏灞€閲忔寚閽堟暟缁?
  *
- * @return std::list<GlobalVariable *> 全局量指针数组
+ * @return std::list<GlobalVariable *> 鍏ㄥ眬閲忔寚閽堟暟缁?
  */
 std::list<GlobalVariable *> Module::get_global_variable() {
   return global_list_;
@@ -176,3 +176,4 @@ std::string Module::print() {
   }
   return module_ir;
 }
+

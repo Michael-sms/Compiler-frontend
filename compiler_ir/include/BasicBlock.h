@@ -1,4 +1,4 @@
-/*!
+﻿/*!
  *@file BasicBlock.h
  *@brief 基本块接口头文件
  *@version 1.0.0
@@ -23,7 +23,7 @@ class Instruction;
 class Module;
 
 /*!
-  @brief 基本块节点
+  @brief 鍩烘湰鍧楄妭鐐?
 */
 class BasicBlock : public Value {
 private:
@@ -35,10 +35,10 @@ private:
 
 public:
   /*!
-   *@brief 基本块的构造函数
+   *@brief 鍩烘湰鍧楃殑鏋勯€犲嚱鏁?
    *@param m 所从属模块
-   *@param name 基本块名称
-   *@param parent 所从属的函数
+   *@param name 鍩烘湰鍧楀悕绉?
+   *@param parent 鎵€浠庡睘鐨勫嚱鏁?
    *@param fake 是否是假基本块，即基本块是否为空
    *@return 当前对象本身
    */
@@ -48,8 +48,8 @@ public:
   /*!
    *@brief 基本块的创建函数
    *@param m 所从属模块
-   *@param name 基本块名称
-   *@param parent 所从属的函数
+   *@param name 鍩烘湰鍧楀悕绉?
+   *@param parent 鎵€浠庡睘鐨勫嚱鏁?
    *@param fake 是否是假基本块，即基本块是否为空，默认为
    *@return 创建的基本块对象指针
    *@note
@@ -63,8 +63,8 @@ public:
   }
 
   /*!
-   *@brief 返回基本块的所属函数
-   *@return 所从属的函数对象指针
+   *@brief 杩斿洖鍩烘湰鍧楃殑鎵€灞炲嚱鏁?
+   *@return 鎵€浠庡睘鐨勫嚱鏁板璞℃寚閽?
    *@note
    *----------
    *return parent, or null if none.
@@ -72,8 +72,8 @@ public:
   Function *get_parent() { return parent_; }
 
   /*!
-   *@brief 返回基本块的所属模块
-   *@return 从属的模块对象指针
+   *@brief 杩斿洖鍩烘湰鍧楃殑鎵€灞炴ā鍧?
+   *@return 浠庡睘鐨勬ā鍧楀璞℃寚閽?
    *@note
    *----------
    *return parent, or null if none.
@@ -99,16 +99,16 @@ public:
   std::list<BasicBlock *> &get_succ_basic_blocks() { return succ_bbs_; }
 
   /*!
-   *@brief 向前置基本块链中插入新的基本块
-   *@param bb 待插入的基本块指针
+   *@brief 鍚戝墠缃熀鏈潡閾句腑鎻掑叆鏂扮殑鍩烘湰鍧?
+   *@param bb 寰呮彃鍏ョ殑鍩烘湰鍧楁寚閽?
    *@note
    *----------
    */
   void add_pre_basic_block(BasicBlock *bb) { pre_bbs_.push_back(bb); }
 
   /*!
-   *@brief 向后置基本块链中插入新的基本块
-   *@param bb 待插入的基本块指针
+   *@brief 鍚戝悗缃熀鏈潡閾句腑鎻掑叆鏂扮殑鍩烘湰鍧?
+   *@param bb 寰呮彃鍏ョ殑鍩烘湰鍧楁寚閽?
    *@note
    *----------
    *return parent, or null if none.
@@ -117,11 +117,11 @@ public:
 
   /*!
    *@brief 更新基本块的前置基本块链
-   *@param bb_list 基本块链的集合
+   *@param bb_list 鍩烘湰鍧楅摼鐨勯泦鍚?
    *@note
    *----------
-   *&emsp; 清空原先的前置基本块链
-   *&emsp; 用新的基本块链进行填充
+   *&emsp; 娓呯┖鍘熷厛鐨勫墠缃熀鏈潡閾?
+   *&emsp; 鐢ㄦ柊鐨勫熀鏈潡閾捐繘琛屽～鍏?
    */
   void set_pre_bb(const std::set<BasicBlock *> &bb_list) {
     pre_bbs_.clear();
@@ -130,11 +130,11 @@ public:
 
   /*!
    *@brief 更新基本块的后置基本块链
-   *@param bb_list 基本块链的集合
+   *@param bb_list 鍩烘湰鍧楅摼鐨勯泦鍚?
    *@note
    *----------
-   *&emsp; 清空原先的后置基本块链
-   *&emsp; 用新的基本块链进行填充
+   *&emsp; 娓呯┖鍘熷厛鐨勫悗缃熀鏈潡閾?
+   *&emsp; 鐢ㄦ柊鐨勫熀鏈潡閾捐繘琛屽～鍏?
    */
   void set_succ_bb(const std::set<BasicBlock *> &bb_list) {
     succ_bbs_.clear();
@@ -144,7 +144,7 @@ public:
   /*!
    *@brief 替换指定的基本块
    *@param oldBB 被替换的旧基本块指针
-   *@param newBB 用于替换的新基本块指针
+   *@param newBB 鐢ㄤ簬鏇挎崲鐨勬柊鍩烘湰鍧楁寚閽?
    *@note
    *----------
    *####1 替换前置基本块链中的旧基本块
@@ -169,7 +169,7 @@ public:
 
   /*!
    *@brief 删除前置基本块链的指定基本块
-   *@param 待删除的基本块指针
+   *@param 寰呭垹闄ょ殑鍩烘湰鍧楁寚閽?
    *@note
    *----------
    *pre list remove bb
@@ -178,7 +178,7 @@ public:
 
   /*!
    *@brief 删除后置基本块链的指定基本块
-   *@param 待删除的基本块指针
+   *@param 寰呭垹闄ょ殑鍩烘湰鍧楁寚閽?
    *@note
    *----------
    *succ list remove bb
@@ -186,24 +186,24 @@ public:
   void remove_succ_basic_block(BasicBlock *bb) { succ_bbs_.remove(bb); }
 
   /*!
-   *@brief 获取基本块内的终结指令
+   *@brief 鑾峰彇鍩烘湰鍧楀唴鐨勭粓缁撴寚浠?
    *@return 终结指令常量指针
    *@note
    *----------
    *Returns the terminator instruction if the block is well formed
    *if the block is not well formed then null
-   *返回基本块的的中的终结指令常量指针
+   *杩斿洖鍩烘湰鍧楃殑鐨勪腑鐨勭粓缁撴寚浠ゅ父閲忔寚閽?
    */
   const Instruction *get_terminator() const;
 
   /*!
-   *@brief 获取基本块内的终结指令
+   *@brief 鑾峰彇鍩烘湰鍧楀唴鐨勭粓缁撴寚浠?
    *@return 终结指令常量指针
    *@note
    *----------
    *Returns the terminator instruction if the block is well formed
    *if the block is not well formed then null
-   *返回基本块的的中的终结指令常量指针
+   *杩斿洖鍩烘湰鍧楃殑鐨勪腑鐨勭粓缁撴寚浠ゅ父閲忔寚閽?
    */
   Instruction *get_terminator() {
     return const_cast<Instruction *>(
@@ -211,20 +211,20 @@ public:
   }
 
   /*!
-   *@brief 向基本块中添加指令
+   *@brief 鍚戝熀鏈潡涓坊鍔犳寚浠?
    *@param instr 待添加的指令指针
    *@note
    *----------
-   *在基本块的尾部添加指令
+   *鍦ㄥ熀鏈潡鐨勫熬閮ㄦ坊鍔犳寚浠?
    */
   void add_instruction(Instruction *instr);
 
   /*!
-   *@brief 向基本块中添加指令
+   *@brief 鍚戝熀鏈潡涓坊鍔犳寚浠?
    *@param instr 待添加的指令指针
    *@note
    *----------
-   *在基本块的头部添加指令
+   *鍦ㄥ熀鏈潡鐨勫ご閮ㄦ坊鍔犳寚浠?
    */
   void add_instr_begin(Instruction *instr);
 
@@ -233,23 +233,23 @@ public:
    *@param 待添加的指令指针
    *@note
    *----------
-   *向phi指令后添加指令
+   *鍚憄hi鎸囦护鍚庢坊鍔犳寚浠?
    */
   void add_instr_after_phi(Instruction *instr);
 
   /*!
-   *@brief 删除基本块中的某个指令
+   *@brief 鍒犻櫎鍩烘湰鍧椾腑鐨勬煇涓寚浠?
    *@param 待删除的指令指针
    *@note
    *----------
-   *&emsp; 删除维护的指令链表中的指令
+   *&emsp; 鍒犻櫎缁存姢鐨勬寚浠ら摼琛ㄤ腑鐨勬寚浠?
    *&emsp; 获取删除的指令的前后指令
-   *&emsp; 修正指令的链接关系：，
-   *&emsp; **if** 如果前置指令不为空
-   *&emsp;&emsp; 为前置指令设置新的后置指令
-   *&emsp; **if** 如果后置指令不为空
-   *&emsp;&emsp; 为后置指令设置新的前置指令
-   *&emsp; 被删除的指令进行相关use的删除
+   *&emsp; 淇鎸囦护鐨勯摼鎺ュ叧绯伙細锛?
+   *&emsp; **if** 濡傛灉鍓嶇疆鎸囦护涓嶄负绌?
+   *&emsp;&emsp; 涓哄墠缃寚浠よ缃柊鐨勫悗缃寚浠?
+   *&emsp; **if** 濡傛灉鍚庣疆鎸囦护涓嶄负绌?
+   *&emsp;&emsp; 涓哄悗缃寚浠よ缃柊鐨勫墠缃寚浠?
+   *&emsp; 琚垹闄ょ殑鎸囦护杩涜鐩稿叧use鐨勫垹闄?
    */
   void delete_instr(Instruction *instr);
 
@@ -263,8 +263,8 @@ public:
   bool empty() { return instr_list_.empty(); }
 
   /*!
-   *@brief 判断是否是假基本块
-   *@return 基本块判定结果
+   *@brief 鍒ゆ柇鏄惁鏄亣鍩烘湰鍧?
+   *@return 鍩烘湰鍧楀垽瀹氱粨鏋?
    *@note
    *----------
    *为假1，不为假0
@@ -288,7 +288,7 @@ public:
   std::list<Instruction *> &get_instructions() { return instr_list_; }
 
   /*!
-   *@brief 将基本块从从属的函数中删除
+   *@brief 灏嗗熀鏈潡浠庝粠灞炵殑鍑芥暟涓垹闄?
    *@note
    *----------
    *获取基本块的所属函数并删除函数所保存的关于该基本块的指针
@@ -296,7 +296,7 @@ public:
   void erase_from_parent();
 
   /*!
-   *@brief 打印基本块
+   *@brief 鎵撳嵃鍩烘湰鍧?
    *@note
    *----------
    *return parent, or null if none.
@@ -305,3 +305,5 @@ public:
 };
 
 #endif
+
+

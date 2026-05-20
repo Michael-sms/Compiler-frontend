@@ -1,6 +1,6 @@
-/*!
+﻿/*!
  *@file Instruction.h
- *@brief 指令接口头文件
+ *@brief 鎸囦护鎺ュ彛澶存枃浠?
  *@version 1.0.0
  *@date 2022-10-04
  */
@@ -67,9 +67,9 @@ public:
 
   /// ============= INLINE OPTIMIZATION HELPER FUNCTIONS ==============
 
-  // 创建一个指令的深拷贝
+  // 鍒涘缓涓€涓寚浠ょ殑娣辨嫹璐?
   virtual Instruction *deepcopy(BasicBlock *parent) = 0;
-  // 利用map映射替换指令内部所有指针到新值
+  // 鍒╃敤map鏄犲皠鏇挎崲鎸囦护鍐呴儴鎵€鏈夋寚閽堝埌鏂板€?
   virtual void transplant(std::map<Value *, Value *> ptMap) {
     // 替换UseList
     auto it = use_list_.begin();
@@ -546,7 +546,7 @@ private:
   bool init;
 };
 
-// 位扩展指令
+// 浣嶆墿灞曟寚浠?
 class ZextInst : public Instruction {
 private:
   ZextInst(OpID op, Value *val, Type *ty, BasicBlock *bb);
@@ -649,3 +649,5 @@ public:
 };
 
 #endif // SYSYC_INSTRUCTION_H
+
+

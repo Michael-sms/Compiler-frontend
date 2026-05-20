@@ -1,4 +1,4 @@
-#include "lexer.h"
+﻿#include "lexer.h"
 #include "SLRParser.h"
 
 #include <fstream>
@@ -8,7 +8,7 @@
 
 namespace {
 void runLexerDemo() {
-    // 包含各类情况的综合单测输入样例
+    // 鍖呭惈鍚勭被鎯呭喌鐨勭患鍚堝崟娴嬭緭鍏ユ牱渚?
     std::string sourceCode = R"(
         INT Main() {
             /* Lexer test */
@@ -26,7 +26,7 @@ void runLexerDemo() {
     Lexer lexer(sourceCode);
     std::vector<Token> tokens = lexer.tokenize();
 
-    // 按格式打印规约结果
+    // 鎸夋牸寮忔墦鍗拌绾︾粨鏋?
     Lexer::printTokens(tokens);
 
     // 打印符号表（供检查）

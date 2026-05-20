@@ -1,4 +1,4 @@
-#include "lexer.h"
+﻿#include "lexer.h"
 #include <iostream>
 #include <cctype>
 #include <algorithm>
@@ -136,7 +136,7 @@ std::vector<Token> Lexer::tokenize() {
 
             tokens.push_back({type, lexeme, currentLine, currentCol});
             
-            // 维护前端符号表 (仅加入标识符，Parser后续补充类型和作用域)
+            // 缁存姢鍓嶇绗﹀彿琛?(浠呭姞鍏ユ爣璇嗙锛孭arser鍚庣画琛ュ厖绫诲瀷鍜屼綔鐢ㄥ煙)
             if (type == TokenType::IDN) {
                 symTable.insert(lexeme, {lexeme, "var", "unknown", 0, ""});
             }
@@ -149,7 +149,7 @@ std::vector<Token> Lexer::tokenize() {
         }
     }
     
-    // 接口统一规范：末尾追加 EOF
+    // 鎺ュ彛缁熶竴瑙勮寖锛氭湯灏捐拷鍔?EOF
     tokens.push_back({TokenType::EOF_TOK, "EOF", currentLine, currentCol});
     return tokens;
 }

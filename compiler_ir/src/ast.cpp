@@ -1,4 +1,4 @@
-#include "ast.h"
+﻿#include "ast.h"
 
 #include <utility>
 
@@ -64,3 +64,4 @@ void DumpAstPreorder(const ASTNodePtr& node, std::ostream& out, int indent) {
 }
 
 }  // namespace frontend
+

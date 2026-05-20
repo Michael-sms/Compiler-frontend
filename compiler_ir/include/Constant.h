@@ -1,6 +1,6 @@
-/*!
+﻿/*!
  *@file Constant.h
- *@brief 常量接口头文件
+ *@brief 甯搁噺鎺ュ彛澶存枃浠?
  *@version 1.0.0
  *@date 2022-10-04
  */
@@ -20,11 +20,11 @@ class Constant : public User {
 private:
 public:
   /*!
-   *@brief 常量基类构造函数
+   *@brief 甯搁噺鍩虹被鏋勯€犲嚱鏁?
    *@param ty 常量类型
    *@param name 常量名称
    *@param 常量的操作数序号，默认为0
-   *@return 自身类对象
+   *@return 鑷韩绫诲璞?
    *constant variable
    */
   Constant(Type *ty, const std::string &name = "", unsigned num_ops = 0)
@@ -42,45 +42,45 @@ public:
  */
 class ConstantInt : public Constant {
 private:
-  int value_; /// 初始值
+  int value_; /// 鍒濆鍊?
 
 public:
   /*!
-   *@brief 常量整数类构造函数
+   *@brief 甯搁噺鏁存暟绫绘瀯閫犲嚱鏁?
    *@param ty 常量类型
-   *@param val 常量数值
-   *@return 自身类对象
+   *@param val 甯搁噺鏁板€?
+   *@return 鑷韩绫诲璞?
    *constant variable
    */
   ConstantInt(Type *ty, int val) : Constant(ty, "", 0), value_(val) {}
   /*!
-   *@brief 获取常量值
+   *@brief 鑾峰彇甯搁噺鍊?
    *@param const_val 常量对象指针
-   *@return 对象指针元素value值
+   *@return 瀵硅薄鎸囬拡鍏冪礌value鍊?
    */
   static int get_value(ConstantInt *const_val) { return const_val->value_; }
   /*!
-   *@brief 获取常量值
-   *@return 内部对象指针元素value值
+   *@brief 鑾峰彇甯搁噺鍊?
+   *@return 鍐呴儴瀵硅薄鎸囬拡鍏冪礌value鍊?
    */
   int get_value() const { return value_; }
   /*!
-   *@brief 常量整数类32位创建函数
-   *@param val 常量值
-   *@param m 所属模块
-   *@return 常量类对象指针
+   *@brief 甯搁噺鏁存暟绫?2浣嶅垱寤哄嚱鏁?
+   *@param val 甯搁噺鍊?
+   *@param m 鎵€灞炴ā鍧?
+   *@return 甯搁噺绫诲璞℃寚閽?
    */
   static ConstantInt *get(int val, Module *m);
   /*!
-   *@brief 常量整数类1位创建函数
-   *@param val 常量值
-   *@param m 所属模块
-   *@return 常量类对象指针
+   *@brief 甯搁噺鏁存暟绫?浣嶅垱寤哄嚱鏁?
+   *@param val 甯搁噺鍊?
+   *@param m 鎵€灞炴ā鍧?
+   *@return 甯搁噺绫诲璞℃寚閽?
    */
   static ConstantInt *get(bool val, Module *m);
   /*!
-   *@brief 打印常量类变量
-   *@return 字符串
+   *@brief 鎵撳嵃甯搁噺绫诲彉閲?
+   *@return 瀛楃涓?
    */
   std::string print() override;
 };
@@ -93,31 +93,31 @@ class ConstantArray : public Constant {
 private:
   std::vector<Constant *> const_array; ///! 常量数组
   /*!
-   *@brief 常量整数类构造函数
+   *@brief 甯搁噺鏁存暟绫绘瀯閫犲嚱鏁?
    *@param ty 常量类型
-   *@param val 常量数值类型数组
-   *@return 自身类对象
+   *@param val 甯搁噺鏁板€肩被鍨嬫暟缁?
+   *@return 鑷韩绫诲璞?
    *constant int array
    */
   ConstantArray(ArrayType *ty, const std::vector<Constant *> &val);
 
 public:
   /*!
-   *@brief 常量整数类析构函数
+   *@brief 甯搁噺鏁存暟绫绘瀽鏋勫嚱鏁?
    *constant int array
    */
   ~ConstantArray() = default;
 
   /*!
-   *@brief 获取常量数组指定索引的常量数值
+   *@brief 鑾峰彇甯搁噺鏁扮粍鎸囧畾绱㈠紩鐨勫父閲忔暟鍊?
    *@param index 索引
-   *@return 常量类指针
+   *@return 甯搁噺绫绘寚閽?
    *constant int array
    */
   Constant *get_element_value(int index);
 
   /*!
-   *@brief 获取常量类数组大小
+   *@brief 鑾峰彇甯搁噺绫绘暟缁勫ぇ灏?
    *@return 常量数组大小
    *constant int array
    */
@@ -125,27 +125,27 @@ public:
 
   /*!
    *@brief 常量数组类的创建函数
-   *@param ty 数组元素的类型
-   *@param val 常量类数组
-   *@return 常量数组类指针
+   *@param ty 鏁扮粍鍏冪礌鐨勭被鍨?
+   *@param val 甯搁噺绫绘暟缁?
+   *@return 甯搁噺鏁扮粍绫绘寚閽?
    *constant int array
    */
   static ConstantArray *get(ArrayType *ty, const std::vector<Constant *> &val);
 
   /*!
-   *@brief 常量数组类打印函数
-   *@return 字符串
+   *@brief 甯搁噺鏁扮粍绫绘墦鍗板嚱鏁?
+   *@return 瀛楃涓?
    *constant int array
    */
   std::string print() override;
 
   /*!
-   *@brief 常量整数类构造函数
+   *@brief 甯搁噺鏁存暟绫绘瀯閫犲嚱鏁?
    *@param dim 常量类型
-   *@param init 初始化数组
-   *@param m 所属数组
-   *@return 常量类指针数组
-   *@todo 仅适用于全局常量数组的赋值
+   *@param init 鍒濆鍖栨暟缁?
+   *@param m 鎵€灞炴暟缁?
+   *@return 甯搁噺绫绘寚閽堟暟缁?
+   *@todo 浠呴€傜敤浜庡叏灞€甯搁噺鏁扮粍鐨勮祴鍊?
    *constant int array
    */
   static std::vector<Constant *>
@@ -177,7 +177,7 @@ public:
   };
 };
 
-/*! 常量零值
+/*! 甯搁噺闆跺€?
  *constant int zero
  */
 class ConstantZero : public Constant {
@@ -186,18 +186,20 @@ private:
 
 public:
   /*!
-   *@brief 常量整数类构造函数
+   *@brief 甯搁噺鏁存暟绫绘瀯閫犲嚱鏁?
    *@param ty 常量类型
-   *@param val 常量数值类型数组
-   *@return 自身类对象
+   *@param val 甯搁噺鏁板€肩被鍨嬫暟缁?
+   *@return 鑷韩绫诲璞?
    *constant int zero
    */
   static ConstantZero *get(Type *ty, Module *m);
   /*!
-   *@brief 打印常量零值
-   *@return 字符串
+   *@brief 鎵撳嵃甯搁噺闆跺€?
+   *@return 瀛楃涓?
    *constant int zero
    */
   std::string print() override;
 };
 #endif // SYSYC_CONSTANT_H
+
+

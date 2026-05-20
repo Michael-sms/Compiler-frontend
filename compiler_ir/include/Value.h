@@ -1,4 +1,4 @@
-/*!
+﻿/*!
  *@file Value.h
  *@brief Value类接口头文件
  *@version 1.0.0
@@ -19,7 +19,7 @@ class Value;
 struct Use {
   Value *val_;      // 使用value的value
   unsigned arg_no_; // the no. of operand, e.g., func(a, b), a is 0, b is 1
-  Use(Value *val, unsigned no) : val_(val), arg_no_(no) {} // 构造函数
+  Use(Value *val, unsigned no) : val_(val), arg_no_(no) {} // 鏋勯€犲嚱鏁?
 
   /*!
    *@brief 判定两个use是否相等
@@ -42,40 +42,40 @@ protected:
 
 public:
   /*!
-   *@brief Value的构造函数
+   *@brief Value鐨勬瀯閫犲嚱鏁?
    *@param ty 类型
    *@param name value名称
    *@return 当前对象本身
    */
   explicit Value(Type *ty, const std::string &name = "");
   /*!
-   *@brief Value的析构函数
+   *@brief Value鐨勬瀽鏋勫嚱鏁?
    */
   ~Value() = default;
 
   /*!
-   *@brief 获取value的类型
+   *@brief 鑾峰彇value鐨勭被鍨?
    *@return value 类型常量指针
    */
   Type *get_type() const { return type_; }
 
   /*!
    *@brief 获取使用该value的use list
-   *@return 返回use-list的引用
+   *@return 杩斿洖use-list鐨勫紩鐢?
    */
   std::list<Use> &get_use_list() { return use_list_; }
 
   /*!
    *@brief 添加use
    *@param val 使用该value的value
-   *@param arg_no 在指令中的顺序
+   *@param arg_no 鍦ㄦ寚浠や腑鐨勯『搴?
    */
   void add_use(Value *val, unsigned arg_no = 0);
 
   /*!
    *@brief 对于value设置名称
    *@param name value名称
-   *@return 名称设置的布尔结果
+   *@return 鍚嶇О璁剧疆鐨勫竷灏旂粨鏋?
    *@note
    *---------
    *名字为空即设置新名字，设置后不再进行修改
@@ -89,31 +89,31 @@ public:
   }
 
   /*!
-   *@brief 获取value的名称
-   *@return value字符串常量
+   *@brief 鑾峰彇value鐨勫悕绉?
+   *@return value瀛楃涓插父閲?
    */
   std::string get_name() const;
 
   /*!
    *@brief 替换所有对于旧value的引用，改为新的
-   *@param new_val value型指针
+   *@param new_val value鍨嬫寚閽?
    *@note
    *--------
-   *支持对于所有的value的修改，包括基本块
+   *鏀寔瀵逛簬鎵€鏈夌殑value鐨勪慨鏀癸紝鍖呮嫭鍩烘湰鍧?
    */
   void replace_all_use_with(Value *new_val);
 
   /*!
    *@brief 替换所有对于旧value的引用，改为新的
-   *@param val value型指针
+   *@param val value鍨嬫寚閽?
    *@note
    *----------
-   *支持对于指令级别value的替换
+   *鏀寔瀵逛簬鎸囦护绾у埆value鐨勬浛鎹?
    */
   void remove_use(Value *val);
 
   /*!
-   *@brief value的打印
+   *@brief value鐨勬墦鍗?
    *@return 默认为空
    *@note
    *--------
@@ -123,3 +123,5 @@ public:
 };
 
 #endif // SYSYC_VALUE_H
+
+

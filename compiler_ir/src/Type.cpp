@@ -1,4 +1,4 @@
-/*!
+﻿/*!
  *@file Type.h
  *@brief 类型接口定义文件
  *@version 1.0.0
@@ -13,55 +13,55 @@
  * @brief Construct a new Type object
  *
  * @param tid 类型
- * @param m 所属模块
+ * @param m 鎵€灞炴ā鍧?
  */
 Type::Type(TypeID tid, Module *m) {
   tid_ = tid;
   m_ = m;
 }
 /**
- * @brief Get the module object，获取所属模块
+ * @brief Get the module object锛岃幏鍙栨墍灞炴ā鍧?
  *
  * @return Module* 模块指针
  */
 Module *Type::get_module() { return m_; }
 /**
- * @brief 判断两个类型是否一致
+ * @brief 鍒ゆ柇涓や釜绫诲瀷鏄惁涓€鑷?
  *
- * @return true 是
+ * @return true 鏄?
  * @return false 不是
  */
 bool Type::is_eq_type(Type *ty1, Type *ty2) { return ty1 == ty2; }
 /**
  * @brief 获取一个void类型指针
- * @param m 所属模块
+ * @param m 鎵€灞炴ā鍧?
  */
 Type *Type::get_void_type(Module *m) { return m->get_void_type(); }
 /**
  * @brief Get the label type object
  *
- * @param m 所属模块
+ * @param m 鎵€灞炴ā鍧?
  * @return Type* label类型指针
  */
 Type *Type::get_label_type(Module *m) { return m->get_label_type(); }
 /**
  * @brief Get the int1 type object
  *
- * @param m 所属模块
- * @return IntegerType* 1位整数类型指针
+ * @param m 鎵€灞炴ā鍧?
+ * @return IntegerType* 1浣嶆暣鏁扮被鍨嬫寚閽?
  */
 IntegerType *Type::get_int1_type(Module *m) { return m->get_int1_type(); }
 /**
  * @brief Get the int32 type object
  *
- * @param m 所属模块
- * @return IntegerType* 32位整数类型指针
+ * @param m 鎵€灞炴ā鍧?
+ * @return IntegerType* 32浣嶆暣鏁扮被鍨嬫寚閽?
  */
 IntegerType *Type::get_int32_type(Module *m) { return m->get_int32_type(); }
 /**
  * @brief Get the pointer type object
  *
- * @param contained 所指向的数据类型指针
+ * @param contained 鎵€鎸囧悜鐨勬暟鎹被鍨嬫寚閽?
  * @return PointerType* 指针类型指针
  */
 PointerType *Type::get_pointer_type(Type *contained) {
@@ -80,8 +80,8 @@ ArrayType *Type::get_array_type(Type *contained, unsigned num_elements) {
 /**
  * @brief Get the int32 ptr type object
  *
- * @param m 所属模块
- * @return PointerType* 32位整数指针类型指针
+ * @param m 鎵€灞炴ā鍧?
+ * @return PointerType* 32浣嶆暣鏁版寚閽堢被鍨嬫寚閽?
  */
 PointerType *Type::get_int32_ptr_type(Module *m) {
   return m->get_int32_ptr_type();
@@ -89,14 +89,14 @@ PointerType *Type::get_int32_ptr_type(Module *m) {
 /**
  * @brief Get the float type object
  *
- * @param m 所属模块
+ * @param m 鎵€灞炴ā鍧?
  * @return FloatType* 浮点数据类型指针
  */
 FloatType *Type::get_float_type(Module *m) { return m->get_float_type(); }
 /**
  * @brief Get the float ptr type object
  *
- * @param m 所属模块
+ * @param m 鎵€灞炴ā鍧?
  * @return PointerType* 浮点数据指针类型指针
  */
 PointerType *Type::get_float_ptr_type(Module *m) {
@@ -114,7 +114,7 @@ Type *Type::get_pointer_element_type() {
     return nullptr;
 }
 /**
- * @brief Get the array element type object，获取数组元素数据类型
+ * @brief Get the array element type object锛岃幏鍙栨暟缁勫厓绱犳暟鎹被鍨?
  *
  * @return Type* 数组元素数据类型指针
  */
@@ -125,13 +125,13 @@ Type *Type::get_array_element_type() {
     return nullptr;
 }
 /**
- * @brief Get the size object，获取对应类型数据大小
+ * @brief Get the size object锛岃幏鍙栧搴旂被鍨嬫暟鎹ぇ灏?
  *
  * @param extended 范围是否延申，即在判定数组指针时，是否计算指向的数组大小
  * @return int 大小
- * @note 如果是整数，那么返回32或1
- * @note 如果是数组，那么返回元素大小乘元素个数
- * @note 如果是指针，那么返回指针大小或是指针指向数组的大小
+ * @note 濡傛灉鏄暣鏁帮紝閭ｄ箞杩斿洖32鎴?
+ * @note 濡傛灉鏄暟缁勶紝閭ｄ箞杩斿洖鍏冪礌澶у皬涔樺厓绱犱釜鏁?
+ * @note 濡傛灉鏄寚閽堬紝閭ｄ箞杩斿洖鎸囬拡澶у皬鎴栨槸鎸囬拡鎸囧悜鏁扮粍鐨勫ぇ灏?
  */
 int Type::get_size(bool extended) {
   if (this->is_integer_type()) {
@@ -206,23 +206,23 @@ std::string Type::print() {
 /**
  * @brief Construct a new Void Type object
  *
- * @param m 所属模块
+ * @param m 鎵€灞炴ā鍧?
  */
 VoidType::VoidType(Module *m) : Type(Type::VoidTyID, m) {}
 /**
  * @brief Construct a new Integer Type object
  *
- * @param num_bits 位数：32/1
- * @param m 所属模块
+ * @param num_bits 浣嶆暟锛?2/1
+ * @param m 鎵€灞炴ā鍧?
  */
 IntegerType::IntegerType(unsigned num_bits, Module *m)
     : Type(num_bits == 1 ? Type::IntegerTy1ID : Type::IntegerTy32ID, m),
       num_bits_(num_bits) {}
 /**
- * @brief 获取一个构建好的整数类型指针
+ * @brief 鑾峰彇涓€涓瀯寤哄ソ鐨勬暣鏁扮被鍨嬫寚閽?
  *
  * @param num_bits 位数
- * @param m 所属模块
+ * @param m 鎵€灞炴ā鍧?
  * @return IntegerType*
  */
 IntegerType *IntegerType::get(unsigned num_bits, Module *m) {
@@ -274,7 +274,7 @@ bool FunctionType::is_valid_argument_type(Type *ty) {
   return ty->is_integer_type() || ty->is_pointer_type() || ty->is_float_type();
 }
 /**
- * @brief 创建一个函数类型指针
+ * @brief 鍒涘缓涓€涓嚱鏁扮被鍨嬫寚閽?
  *
  * @param result 返回参数类型指针
  * @param params 参数类型指针数组
@@ -284,13 +284,13 @@ FunctionType *FunctionType::get(Type *result, std::vector<Type *> params) {
   return new FunctionType(result, params);
 }
 /**
- * @brief Get the num of args object，获取参数个数
+ * @brief Get the num of args object锛岃幏鍙栧弬鏁颁釜鏁?
  *
  * @return unsigned 参数数量
  */
 unsigned FunctionType::get_num_of_args() const { return args_.size(); }
 /**
- * @brief Get the param type object，获取参数类型
+ * @brief Get the param type object锛岃幏鍙栧弬鏁扮被鍨?
  *
  * @param i 要获取的参数索引
  * @return Type* 参数类型结果
@@ -303,7 +303,7 @@ Type *FunctionType::get_param_type(unsigned i) const { return args_[i]; }
  */
 Type *FunctionType::get_return_type() const { return result_; }
 /**
- * @brief Construct a new Array Type object，创建一个数组类型对象
+ * @brief Construct a new Array Type object锛屽垱寤轰竴涓暟缁勭被鍨嬪璞?
  *
  * @param contained 数组类型
  * @param num_elements 数组元素个数
@@ -326,7 +326,7 @@ bool ArrayType::is_valid_element_type(Type *ty) {
   return ty->is_integer_type() || ty->is_array_type() || ty->is_float_type();
 }
 /**
- * @brief 创建一个数组类型，并返回指针
+ * @brief 鍒涘缓涓€涓暟缁勭被鍨嬶紝骞惰繑鍥炴寚閽?
  *
  * @param contained 数组元素类型
  * @param num_elements 数组元素个数
@@ -338,22 +338,23 @@ ArrayType *ArrayType::get(Type *contained, unsigned num_elements) {
 /**
  * @brief Construct a new Pointer Type object
  *
- * @param contained 指针指向元素的类型
+ * @param contained 鎸囬拡鎸囧悜鍏冪礌鐨勭被鍨?
  */
 PointerType::PointerType(Type *contained)
     : Type(Type::PointerTyID, contained->get_module()), contained_(contained) {}
 /**
- * @brief 创建一个指针类型
+ * @brief 鍒涘缓涓€涓寚閽堢被鍨?
  *
- * @param contained 指向元素的类型
+ * @param contained 鎸囧悜鍏冪礌鐨勭被鍨?
  * @return PointerType* 指针类型指针
  */
 PointerType *PointerType::get(Type *contained) {
   return contained->get_module()->get_pointer_type(contained);
 }
 /**
- * @brief Construct a new Float Type object，构建浮点类型
+ * @brief Construct a new Float Type object锛屾瀯寤烘诞鐐圭被鍨?
  *
- * @param m 所属模块
+ * @param m 鎵€灞炴ā鍧?
  */
 FloatType::FloatType(Module *m) : Type(Type::FloatTyID, m) {}
+

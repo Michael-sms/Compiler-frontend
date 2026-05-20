@@ -1,6 +1,6 @@
-/*!
+﻿/*!
  *@file User.h
- *@brief 用户类接口定义文件
+ *@brief 鐢ㄦ埛绫绘帴鍙ｅ畾涔夋枃浠?
  *@version 1.0.0
  *@date 2022-10-04
  */
@@ -9,10 +9,10 @@
 #include <cassert>
 
 /*!
- *@brief User的构造函数
+ *@brief User鐨勬瀯閫犲嚱鏁?
  *@param ty 类型
  *@param name User名称
- *@param num_ops value的位置
+ *@param num_ops value鐨勪綅缃?
  *@return 当前对象本身
  *@note
  *---------
@@ -24,22 +24,22 @@ User::User(Type *ty, const std::string &name, unsigned num_ops)
 }
 
 /*!
- *@brief 获得包含value指针的数组
+ *@brief 鑾峰緱鍖呭惈value鎸囬拡鐨勬暟缁?
  *@return 返回User维护的Value数组
  */
 std::vector<Value *> &User::get_operands() { return operands_; }
 
 /*!
- *@brief 获得数组中的第i个value数值指针
- *@return 获得数组中的第i个value数值常量指针
+ *@brief 鑾峰緱鏁扮粍涓殑绗琲涓獀alue鏁板€兼寚閽?
+ *@return 鑾峰緱鏁扮粍涓殑绗琲涓獀alue鏁板€煎父閲忔寚閽?
  */
 Value *User::get_operand(unsigned i) const { return operands_[i]; }
 
 /*!
- *@brief 设置数组中的第i个value数值指针
+ *@brief 璁剧疆鏁扮粍涓殑绗琲涓獀alue鏁板€兼寚閽?
  *@note
  *--------
- *设置数组中的第i个value数值常量指针
+ *璁剧疆鏁扮粍涓殑绗琲涓獀alue鏁板€煎父閲忔寚閽?
  *设置界限检查，查看索引i是否超限
  *--------
  *&emsp; value数组尾插入一个value
@@ -54,8 +54,8 @@ void User::set_operand(unsigned i, Value *v) {
 }
 
 /*!
- *@brief 添加新的value数值指针
- *@param v value数值指针
+ *@brief 娣诲姞鏂扮殑value鏁板€兼寚閽?
+ *@param v value鏁板€兼寚閽?
  *@note
  *--------
  *&emsp; value数组尾插入一个value
@@ -70,7 +70,7 @@ void User::add_operand(Value *v) {
 
 /*!
  *@brief 获取User维护的operand数量
- *@return operand常量数值
+ *@return operand甯搁噺鏁板€?
  *@note
  *-------
  *判断
@@ -78,11 +78,11 @@ void User::add_operand(Value *v) {
 unsigned User::get_num_operand() const { return num_ops_; }
 
 /*!
- *@brief 添加新的value数值指针
- *@param v value数值指针
+ *@brief 娣诲姞鏂扮殑value鏁板€兼寚閽?
+ *@param v value鏁板€兼寚閽?
  *@note
  *--------
- *遍历operands链表，对于每个value量的use_list进行检查
+ *閬嶅巻operands閾捐〃锛屽浜庢瘡涓獀alue閲忕殑use_list杩涜妫€鏌?
  *在operands表中删除对于本对象的使用
  */
 void User::remove_use_of_ops() {
@@ -97,7 +97,7 @@ void User::remove_use_of_ops() {
  *@param index2 索引2
  *@note
  *--------
- *遍历operands表索引范围，删除对于本user的使用
+ *閬嶅巻operands琛ㄧ储寮曡寖鍥达紝鍒犻櫎瀵逛簬鏈瑄ser鐨勪娇鐢?
  *删除本表的相关operands
  *修改operands_size
  */
@@ -108,3 +108,4 @@ void User::remove_operands(int index1, int index2) {
   operands_.erase(operands_.begin() + index1, operands_.begin() + index2 + 1);
   num_ops_ = operands_.size();
 }
+

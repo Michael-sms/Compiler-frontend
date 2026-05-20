@@ -1,4 +1,4 @@
-#ifndef SYSYC_IRBUILDER_H
+﻿#ifndef SYSYC_IRBUILDER_H
 #define SYSYC_IRBUILDER_H
 
 #include "BasicBlock.h"
@@ -13,14 +13,14 @@ private:
 
 public:
   /*!
-   *@brief irbuilder的构造函数
-   *@param bb 基本块
+   *@brief irbuilder鐨勬瀯閫犲嚱鏁?
+   *@param bb 鍩烘湰鍧?
    *@param m 模块
    *@return 当前对象本身
    */
   IRBuilder(BasicBlock *bb, Module *m) : BB_(bb), m_(m){};
   /*!
-   *@brief irbuilder的析构函数
+   *@brief irbuilder鐨勬瀽鏋勫嚱鏁?
    */
   ~IRBuilder() = default;
   /*!
@@ -39,23 +39,23 @@ public:
    */
   Module *get_module() { return m_; }
   /*!
-   *@brief 获取要插入的基本块
-   *@return 基本块指针
+   *@brief 鑾峰彇瑕佹彃鍏ョ殑鍩烘湰鍧?
+   *@return 鍩烘湰鍧楁寚閽?
    */
   BasicBlock *get_insert_block() { return this->BB_; }
   /*!
-   *@brief 更新要进行修改的基本块
-   *@param bb 基本块指针
-   *@note 在某个基本块中插入指令
+   *@brief 鏇存柊瑕佽繘琛屼慨鏀圭殑鍩烘湰鍧?
+   *@param bb 鍩烘湰鍧楁寚閽?
+   *@note 鍦ㄦ煇涓熀鏈潡涓彃鍏ユ寚浠?
    */
   void set_insert_point(BasicBlock *bb) {
     this->BB_ = bb;
-  } //在某个基本块中插入指令
+  } //鍦ㄦ煇涓熀鏈潡涓彃鍏ユ寚浠?
   /*!
    *@brief 创建加法指令
-   *@param lhs 左值指针
-   *@param rhs 右值指针
-   *@return 二元操作符加法指令指针
+   *@param lhs 宸﹀€兼寚閽?
+   *@param rhs 鍙冲€兼寚閽?
+   *@return 浜屽厓鎿嶄綔绗﹀姞娉曟寚浠ゆ寚閽?
    *@note 调用指针类的创建函数
    */
   BinaryInst *create_iadd(Value *lhs, Value *rhs) {
@@ -63,9 +63,9 @@ public:
   } //创建加法指令（以及其他算术指令）
   /*!
    *@brief 创建减法指令
-   *@param lhs 左值指针
-   *@param rhs 右值指针
-   *@return 二元操作符减法指令指针
+   *@param lhs 宸﹀€兼寚閽?
+   *@param rhs 鍙冲€兼寚閽?
+   *@return 浜屽厓鎿嶄綔绗﹀噺娉曟寚浠ゆ寚閽?
    *@note 调用指针类的创建函数
    */
   BinaryInst *create_isub(Value *lhs, Value *rhs) {
@@ -73,9 +73,9 @@ public:
   }
   /*!
    *@brief 创建乘法指令
-   *@param lhs 左值指针
-   *@param rhs 右值指针
-   *@return 二元操作符乘法指令指针
+   *@param lhs 宸﹀€兼寚閽?
+   *@param rhs 鍙冲€兼寚閽?
+   *@return 浜屽厓鎿嶄綔绗︿箻娉曟寚浠ゆ寚閽?
    *@note 调用指针类的创建函数
    */
   BinaryInst *create_imul(Value *lhs, Value *rhs) {
@@ -83,18 +83,18 @@ public:
   }
   /*!
    *@brief 创建除法指令
-   *@param lhs 左值指针
-   *@param rhs 右值指针
-   *@return 二元操作符除法指令指针
+   *@param lhs 宸﹀€兼寚閽?
+   *@param rhs 鍙冲€兼寚閽?
+   *@return 浜屽厓鎿嶄綔绗﹂櫎娉曟寚浠ゆ寚閽?
    *@note 调用指针类的创建函数
    */
   BinaryInst *create_isdiv(Value *lhs, Value *rhs) {
     return BinaryInst::create_sdiv(lhs, rhs, this->BB_, m_);
   }
   /*!
-   *@brief 创建模运算指令
-   *@param lhs 左值指针
-   *@param rhs 右值指针
+   *@brief 鍒涘缓妯¤繍绠楁寚浠?
+   *@param lhs 宸﹀€兼寚閽?
+   *@param rhs 鍙冲€兼寚閽?
    *@return 二元操作符模运算指令指针
    *@note 调用指针类的创建函数
    */
@@ -102,20 +102,20 @@ public:
     return BinaryInst::create_mod(lhs, rhs, this->BB_, m_);
   }
   /*!
-   *@brief 创建与运算指令
-   *@param lhs 左值指针
-   *@param rhs 右值指针
-   *@return 二元操作符除法指令指针
+   *@brief 鍒涘缓涓庤繍绠楁寚浠?
+   *@param lhs 宸﹀€兼寚閽?
+   *@param rhs 鍙冲€兼寚閽?
+   *@return 浜屽厓鎿嶄綔绗﹂櫎娉曟寚浠ゆ寚閽?
    *@note 调用指针类的创建函数
    */
   BinaryInst *create_iand(Value *lhs, Value *rhs) {
     return BinaryInst::create_sdiv(lhs, rhs, this->BB_, m_);
   }
   /*!
-   *@brief 创建或运算指令
-   *@param lhs 左值指针
-   *@param rhs 右值指针
-   *@return 二元操作符除法指令指针
+   *@brief 鍒涘缓鎴栬繍绠楁寚浠?
+   *@param lhs 宸﹀€兼寚閽?
+   *@param rhs 鍙冲€兼寚閽?
+   *@return 浜屽厓鎿嶄綔绗﹂櫎娉曟寚浠ゆ寚閽?
    *@note 调用指针类的创建函数
    */
   BinaryInst *create_ior(Value *lhs, Value *rhs) {
@@ -123,9 +123,9 @@ public:
   }
   /*!
    *@brief 创建比较相等指令
-   *@param lhs 左值指针
-   *@param rhs 右值指针
-   *@return 二元操作符相等指令指针
+   *@param lhs 宸﹀€兼寚閽?
+   *@param rhs 鍙冲€兼寚閽?
+   *@return 浜屽厓鎿嶄綔绗︾浉绛夋寚浠ゆ寚閽?
    *@note 调用指针类的创建函数
    */
 
@@ -134,9 +134,9 @@ public:
   }
   /*!
    *@brief 创建比较不等指令
-   *@param lhs 左值指针
-   *@param rhs 右值指针
-   *@return 二元操作符不等指令指针
+   *@param lhs 宸﹀€兼寚閽?
+   *@param rhs 鍙冲€兼寚閽?
+   *@return 浜屽厓鎿嶄綔绗︿笉绛夋寚浠ゆ寚閽?
    *@note 调用指针类的创建函数
    */
   CmpInst *create_icmp_ne(Value *lhs, Value *rhs) {
@@ -144,9 +144,9 @@ public:
   }
   /*!
    *@brief 创建比较大于等于指令
-   *@param lhs 左值指针
-   *@param rhs 右值指针
-   *@return 二元操作符大于等于指令指针
+   *@param lhs 宸﹀€兼寚閽?
+   *@param rhs 鍙冲€兼寚閽?
+   *@return 浜屽厓鎿嶄綔绗﹀ぇ浜庣瓑浜庢寚浠ゆ寚閽?
    *@note 调用指针类的创建函数
    */
   CmpInst *create_icmp_gt(Value *lhs, Value *rhs) {
@@ -154,9 +154,9 @@ public:
   }
   /*!
    *@brief 创建比较大于指令
-   *@param lhs 左值指针
-   *@param rhs 右值指针
-   *@return 二元操作符大于指令指针
+   *@param lhs 宸﹀€兼寚閽?
+   *@param rhs 鍙冲€兼寚閽?
+   *@return 浜屽厓鎿嶄綔绗﹀ぇ浜庢寚浠ゆ寚閽?
    *@note 调用指针类的创建函数
    */
 
@@ -165,9 +165,9 @@ public:
   }
   /*!
    *@brief 创建比较小于指令
-   *@param lhs 左值指针
-   *@param rhs 右值指针
-   *@return 二元操作符比较小于指令指针
+   *@param lhs 宸﹀€兼寚閽?
+   *@param rhs 鍙冲€兼寚閽?
+   *@return 浜屽厓鎿嶄綔绗︽瘮杈冨皬浜庢寚浠ゆ寚閽?
    *@note 调用指针类的创建函数
    */
   CmpInst *create_icmp_lt(Value *lhs, Value *rhs) {
@@ -175,9 +175,9 @@ public:
   }
   /*!
    *@brief 创建比较小于等于指令
-   *@param lhs 左值指针
-   *@param rhs 右值指针
-   *@return 二元操作符比较小于指令指针
+   *@param lhs 宸﹀€兼寚閽?
+   *@param rhs 鍙冲€兼寚閽?
+   *@return 浜屽厓鎿嶄綔绗︽瘮杈冨皬浜庢寚浠ゆ寚閽?
    *@note 调用指针类的创建函数
    */
   CmpInst *create_icmp_le(Value *lhs, Value *rhs) {
@@ -195,9 +195,9 @@ public:
     return CallInst::create(static_cast<Function *>(func), args, this->BB_);
   }
   /*!
-   *@brief 创建无条件跳转指令
-   *@param if_true 基本块指针
-   *@return 无条件跳转指令指针
+   *@brief 鍒涘缓鏃犳潯浠惰烦杞寚浠?
+   *@param if_true 鍩烘湰鍧楁寚閽?
+   *@return 鏃犳潯浠惰烦杞寚浠ゆ寚閽?
    *@note 调用指针类的创建函数
    */
   BranchInst *create_br(BasicBlock *if_true) {
@@ -205,11 +205,11 @@ public:
   }
 
   /*!
-   *@brief 创建有条件跳转指令
+   *@brief 鍒涘缓鏈夋潯浠惰烦杞寚浠?
    *@param cond 条件
    *@param if_ture 条件为真的基本块指针
    *@param if_false 条件为假的基本块指针
-   *@return 有条件跳转指令指针
+   *@return 鏈夋潯浠惰烦杞寚浠ゆ寚閽?
    *@note 调用指针类的创建函数
    */
   BranchInst *create_cond_br(Value *cond, BasicBlock *if_true,
@@ -218,7 +218,7 @@ public:
   }
   /*!
    *@brief 创建返回指令
-   *@param val 返回值
+   *@param val 杩斿洖鍊?
    *@return 返回指令指针
    *@note 调用指针类的创建函数
    */
@@ -226,8 +226,8 @@ public:
     return ReturnInst::create_ret(val, this->BB_);
   }
   /*!
-   *@brief 创建空值返回指令
-   *@return 无值返回指令指针
+   *@brief 鍒涘缓绌哄€艰繑鍥炴寚浠?
+   *@return 鏃犲€艰繑鍥炴寚浠ゆ寚閽?
    *@note 调用指针类的创建函数
    */
   ReturnInst *create_void_ret() {
@@ -245,7 +245,7 @@ public:
   }
   /*!
    *@brief 创建存储指令
-   *@param val value值指针
+   *@param val value鍊兼寚閽?
    *@param ptr 指针，指向存值的地址
    *@return 存储指令指针
    *@note 调用指针类的创建函数
@@ -288,8 +288,8 @@ public:
 
   /*!
    *@brief 创建扩展指令
-   *@param value value值指针
-   *@param ty 新类型
+   *@param value value鍊兼寚閽?
+   *@param ty 鏂扮被鍨?
    *@return 扩展指令指针
    *@note 调用指针类的创建函数
    */
@@ -299,3 +299,5 @@ public:
 };
 
 #endif // SYSYC_IRBUILDER_H
+
+

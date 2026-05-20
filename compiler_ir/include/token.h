@@ -1,15 +1,15 @@
-#pragma once
+﻿#pragma once
 #include <string>
 
-// 严格遵循规范中的枚举，使用 enum class 避免 EOF 宏冲突
+// 涓ユ牸閬靛惊瑙勮寖涓殑鏋氫妇锛屼娇鐢?enum class 閬垮厤 EOF 瀹忓啿绐?
 enum class TokenType {
-    KW,     // 关键字
-    OP,     // 运算符
+    KW,     // 鍏抽敭瀛?
+    OP,     // 杩愮畻绗?
     SE,     // 界符
-    IDN,    // 标识符
+    IDN,    // 鏍囪瘑绗?
     INT,    // 整数
-    FLOAT,  // 浮点数
-    EOF_TOK,// 结束符 (避免与C宏EOF绝对冲突，输出时转为EOF)
+    FLOAT,  // 娴偣鏁?
+    EOF_TOK,// 缁撴潫绗?(閬垮厤涓嶤瀹廍OF缁濆鍐茬獊锛岃緭鍑烘椂杞负EOF)
     ERROR   // 错误单词
 };
 
@@ -20,3 +20,4 @@ struct Token {
     int line;
     int column;
 };
+

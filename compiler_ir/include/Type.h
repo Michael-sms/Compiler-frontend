@@ -1,6 +1,6 @@
-/*!
+﻿/*!
  *@file Type.h
- *@brief 类型接口头文件
+ *@brief 绫诲瀷鎺ュ彛澶存枃浠?
  *@version 1.0.0
  *@date 2022-10-04
  */
@@ -19,7 +19,7 @@ class PointerType;
 class FloatType;
 
 /**
- * @brief 数值类型
+ * @brief 鏁板€肩被鍨?
  *
  * @note 包含基本的value类型
  */
@@ -50,7 +50,7 @@ public:
    * @brief Construct a new Type object
    *
    * @param tid 类型
-   * @param m 所属模块
+   * @param m 鎵€灞炴ā鍧?
    */
   explicit Type(TypeID tid, Module *m);
   /**
@@ -69,23 +69,23 @@ public:
   /**
    * @brief 判断是否为void类型
    *
-   * @return true 是
+   * @return true 鏄?
    * @return false 不是
    */
   bool is_void_type() const { return get_type_id() == VoidTyID; }
 
   /**
-   * @brief 判断是否为label类型（基本块）
+   * @brief 鍒ゆ柇鏄惁涓簂abel绫诲瀷锛堝熀鏈潡锛?
    *
-   * @return true 是
+   * @return true 鏄?
    * @return false 不是
    */
   bool is_label_type() const { return get_type_id() == LabelTyID; }
 
   /**
-   * @brief 判断是否为整数类型
+   * @brief 鍒ゆ柇鏄惁涓烘暣鏁扮被鍨?
    *
-   * @return true 是 （包括32位和1位）
+   * @return true 鏄?锛堝寘鎷?2浣嶅拰1浣嶏級
    * @return false 不是
    */
   bool is_integer_type() const {
@@ -95,7 +95,7 @@ public:
   /**
    * @brief 判断是否为function类型
    *
-   * @return true 是
+   * @return true 鏄?
    * @return false 不是
    */
   bool is_function_type() const { return get_type_id() == FunctionTyID; }
@@ -103,61 +103,61 @@ public:
   /**
    * @brief 判断是否为array类型
    *
-   * @return true 是
+   * @return true 鏄?
    * @return false 不是
    */
   bool is_array_type() const { return get_type_id() == ArrayTyID; }
 
   /**
-   * @brief 判断是否为指针类型
+   * @brief 鍒ゆ柇鏄惁涓烘寚閽堢被鍨?
    *
-   * @return true 是
+   * @return true 鏄?
    * @return false 不是
    */
   bool is_pointer_type() const { return get_type_id() == PointerTyID; }
 
   /**
-   * @brief 判断是否为浮点类型
+   * @brief 鍒ゆ柇鏄惁涓烘诞鐐圭被鍨?
    *
-   * @return true 是
+   * @return true 鏄?
    * @return false 不是
    */
   bool is_float_type() const { return get_type_id() == FloatTyID; }
 
   /**
-   * @brief 判断是否为整数类型 32位
+   * @brief 鍒ゆ柇鏄惁涓烘暣鏁扮被鍨?32浣?
    *
-   * @return true 是
+   * @return true 鏄?
    * @return false 不是
    */
   bool is_int32_type() const { return get_type_id() == IntegerTy32ID; }
 
   /**
-   * @brief 判断是否为整数类型 1位
+   * @brief 鍒ゆ柇鏄惁涓烘暣鏁扮被鍨?1浣?
    *
-   * @return true 是
+   * @return true 鏄?
    * @return false 不是
    */
   bool is_int1_type() const { return get_type_id() == IntegerTy1ID; }
 
   /**
-   * @brief 判断两个类型是否一致
+   * @brief 鍒ゆ柇涓や釜绫诲瀷鏄惁涓€鑷?
    *
-   * @return true 是
+   * @return true 鏄?
    * @return false 不是
    */
   static bool is_eq_type(Type *ty1, Type *ty2);
 
   /**
    * @brief 获取一个void类型指针
-   * @param m 所属模块
+   * @param m 鎵€灞炴ā鍧?
    */
   static Type *get_void_type(Module *m);
 
   /**
    * @brief Get the label type object
    *
-   * @param m 所属模块
+   * @param m 鎵€灞炴ā鍧?
    * @return Type* label类型指针
    */
   static Type *get_label_type(Module *m);
@@ -165,31 +165,31 @@ public:
   /**
    * @brief Get the int1 type object
    *
-   * @param m 所属模块
-   * @return IntegerType* 1位整数类型指针
+   * @param m 鎵€灞炴ā鍧?
+   * @return IntegerType* 1浣嶆暣鏁扮被鍨嬫寚閽?
    */
   static IntegerType *get_int1_type(Module *m);
 
   /**
    * @brief Get the int32 type object
    *
-   * @param m 所属模块
-   * @return IntegerType* 32位整数类型指针
+   * @param m 鎵€灞炴ā鍧?
+   * @return IntegerType* 32浣嶆暣鏁扮被鍨嬫寚閽?
    */
   static IntegerType *get_int32_type(Module *m);
 
   /**
    * @brief Get the int32 ptr type object
    *
-   * @param m 所属模块
-   * @return PointerType* 32位整数指针类型指针
+   * @param m 鎵€灞炴ā鍧?
+   * @return PointerType* 32浣嶆暣鏁版寚閽堢被鍨嬫寚閽?
    */
   static PointerType *get_int32_ptr_type(Module *m);
 
   /**
    * @brief Get the float type object
    *
-   * @param m 所属模块
+   * @param m 鎵€灞炴ā鍧?
    * @return FloatType* 浮点数据类型指针
    */
   static FloatType *get_float_type(Module *m);
@@ -197,7 +197,7 @@ public:
   /**
    * @brief Get the float ptr type object
    *
-   * @param m 所属模块
+   * @param m 鎵€灞炴ā鍧?
    * @return PointerType* 浮点数据指针类型指针
    */
   static PointerType *get_float_ptr_type(Module *m);
@@ -205,7 +205,7 @@ public:
   /**
    * @brief Get the pointer type object
    *
-   * @param contained 所指向的数据类型指针
+   * @param contained 鎵€鎸囧悜鐨勬暟鎹被鍨嬫寚閽?
    * @return PointerType* 指针类型指针
    */
   static PointerType *get_pointer_type(Type *contained);
@@ -227,14 +227,14 @@ public:
   Type *get_pointer_element_type();
 
   /**
-   * @brief Get the array element type object，获取数组元素数据类型
+   * @brief Get the array element type object锛岃幏鍙栨暟缁勫厓绱犳暟鎹被鍨?
    *
    * @return Type* 数组元素数据类型指针
    */
   Type *get_array_element_type();
 
   /**
-   * @brief Get the size object，获取对应类型数据大小
+   * @brief Get the size object锛岃幏鍙栧搴旂被鍨嬫暟鎹ぇ灏?
    *
    * @param extended 范围是否延申，即在判定数组指针时，是否计算指向的数组大小
    * @return int 大小
@@ -242,7 +242,7 @@ public:
   int get_size(bool extended = true);
 
   /**
-   * @brief Get the module object，获取所属模块
+   * @brief Get the module object锛岃幏鍙栨墍灞炴ā鍧?
    *
    * @return Module* 模块指针
    */
@@ -267,7 +267,7 @@ public:
   /**
    * @brief Construct a new Void Type object
    *
-   * @param m 所属模块
+   * @param m 鎵€灞炴ā鍧?
    */
   explicit VoidType(Module *m);
 };
@@ -278,7 +278,7 @@ public:
  */
 class IntegerType : public Type {
 private:
-  /// @brief 整数的位：32/1
+  /// @brief 鏁存暟鐨勪綅锛?2/1
   unsigned num_bits_;
 
 protected:
@@ -286,16 +286,16 @@ public:
   /**
    * @brief Construct a new Integer Type object
    *
-   * @param num_bits 位数：32/1
-   * @param m 所属模块
+   * @param num_bits 浣嶆暟锛?2/1
+   * @param m 鎵€灞炴ā鍧?
    */
   explicit IntegerType(unsigned num_bits, Module *m);
 
   /**
-   * @brief 获取一个构建好的整数类型指针
+   * @brief 鑾峰彇涓€涓瀯寤哄ソ鐨勬暣鏁扮被鍨嬫寚閽?
    *
    * @param num_bits 位数
-   * @param m 所属模块
+   * @param m 鎵€灞炴ā鍧?
    * @return IntegerType*
    */
   static IntegerType *get(unsigned num_bits, Module *m);
@@ -349,7 +349,7 @@ public:
   static bool is_valid_argument_type(Type *ty);
 
   /**
-   * @brief 创建一个函数类型指针
+   * @brief 鍒涘缓涓€涓嚱鏁扮被鍨嬫寚閽?
    *
    * @param result 返回参数类型指针
    * @param params 参数类型指针数组
@@ -358,29 +358,29 @@ public:
   static FunctionType *get(Type *result, std::vector<Type *> params);
 
   /**
-   * @brief Get the num of args object，获取参数个数
+   * @brief Get the num of args object锛岃幏鍙栧弬鏁颁釜鏁?
    *
    * @return unsigned 参数数量
    */
   unsigned get_num_of_args() const;
 
   /**
-   * @brief Get the param type object，获取参数类型
+   * @brief Get the param type object锛岃幏鍙栧弬鏁扮被鍨?
    *
    * @param i 要获取的参数索引
    * @return Type* 参数类型结果
    */
   Type *get_param_type(unsigned i) const;
   /**
-   * @brief 获取参数列表第一个参数
+   * @brief 鑾峰彇鍙傛暟鍒楄〃绗竴涓弬鏁?
    *
-   * @return std::vector<Type *>::iterator 迭代器，第一个参数指针
+   * @return std::vector<Type *>::iterator 杩唬鍣紝绗竴涓弬鏁版寚閽?
    */
   std::vector<Type *>::iterator param_begin() { return args_.begin(); }
   /**
-   * @brief 获取参数列表最后一个参数
+   * @brief 鑾峰彇鍙傛暟鍒楄〃鏈€鍚庝竴涓弬鏁?
    *
-   * @return std::vector<Type *>::iterator 迭代器，最后一个参数指针
+   * @return std::vector<Type *>::iterator 杩唬鍣紝鏈€鍚庝竴涓弬鏁版寚閽?
    */
   std::vector<Type *>::iterator param_end() { return args_.end(); }
   /**
@@ -402,7 +402,7 @@ private:
 protected:
 public:
   /**
-   * @brief Construct a new Array Type object，创建一个数组类型对象
+   * @brief Construct a new Array Type object锛屽垱寤轰竴涓暟缁勭被鍨嬪璞?
    *
    * @param contained 数组类型
    * @param num_elements 数组元素个数
@@ -419,7 +419,7 @@ public:
   static bool is_valid_element_type(Type *ty);
 
   /**
-   * @brief 创建一个数组类型，并返回指针
+   * @brief 鍒涘缓涓€涓暟缁勭被鍨嬶紝骞惰繑鍥炴寚閽?
    *
    * @param contained 数组元素类型
    * @param num_elements 数组元素个数
@@ -428,13 +428,13 @@ public:
   static ArrayType *get(Type *contained, unsigned num_elements);
 
   /**
-   * @brief Get the element type object，获取数组元素类型
+   * @brief Get the element type object锛岃幏鍙栨暟缁勫厓绱犵被鍨?
    *
    * @return Type* 数组元素类型指针
    */
   Type *get_element_type() const { return contained_; }
   /**
-   * @brief Get the num of elements object，获取数组元素个数
+   * @brief Get the num of elements object锛岃幏鍙栨暟缁勫厓绱犱釜鏁?
    *
    * @return unsigned 元素个数
    */
@@ -455,7 +455,7 @@ public:
   /**
    * @brief Construct a new Pointer Type object
    *
-   * @param contained 指针指向元素的类型
+   * @param contained 鎸囬拡鎸囧悜鍏冪礌鐨勭被鍨?
    */
   PointerType(Type *contained);
   /**
@@ -466,9 +466,9 @@ public:
   Type *get_element_type() const { return contained_; }
 
   /**
-   * @brief 创建一个指针类型
+   * @brief 鍒涘缓涓€涓寚閽堢被鍨?
    *
-   * @param contained 指向元素的类型
+   * @param contained 鎸囧悜鍏冪礌鐨勭被鍨?
    * @return PointerType* 指针类型指针
    */
   static PointerType *get(Type *contained);
@@ -483,18 +483,19 @@ private:
 protected:
 public:
   /**
-   * @brief Construct a new Float Type object，构建浮点类型
+   * @brief Construct a new Float Type object锛屾瀯寤烘诞鐐圭被鍨?
    *
-   * @param m 所属模块
+   * @param m 鎵€灞炴ā鍧?
    */
   FloatType(Module *m);
   /**
-   * @brief 创建一个浮点类型
+   * @brief 鍒涘缓涓€涓诞鐐圭被鍨?
    *
-   * @param m 所属模块
+   * @param m 鎵€灞炴ā鍧?
    * @return FloatType*
    */
   static FloatType *get(Module *m);
 };
 
 #endif // SYSYC_TYPE_H
+
